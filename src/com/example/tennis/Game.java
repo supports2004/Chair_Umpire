@@ -14,18 +14,22 @@ public class Game extends ACounter {
         if (_visual_int == null)
         {
             _visual_int = new Hashtable<String, Integer>();
-            _visual_int.put("0",  0);
-            _visual_int.put("15", 1);
-            _visual_int.put("30", 2);
-            _visual_int.put("40", 3);
-            _visual_int.put("A",  4);
+            _visual_int.put("0",   0);
+            _visual_int.put("15",  1);
+            _visual_int.put("30",  2);
+            _visual_int.put("40",  3);
+            _visual_int.put("",    3);
+            _visual_int.put("AD",  4);
 
             _int_visual = new Hashtable<Integer, String>();
             _int_visual.put(0, "0");
             _int_visual.put(1, "15");
             _int_visual.put(2, "30");
             _int_visual.put(3, "40");
-            _int_visual.put(4, "A");
+            _int_visual.put(35, "");
+            _int_visual.put(4, "AD");
+
+
         }
         _set_start_score(new Runner() {public void run(IPlayer player){player.set_points("0");}});
 
@@ -47,6 +51,11 @@ public class Game extends ACounter {
             w --;
             l --;
         }
+        if (w == 4 && l == 3)
+        {
+            l = 35;     // '40' : 'AD' => '' : 'AD'
+        }
+
         wplayer.set_points(_to_visual(w));
         lplayer.set_points(_to_visual(l));
         return result;
