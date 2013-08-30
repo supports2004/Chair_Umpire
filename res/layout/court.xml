@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout         android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center">
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:gravity="center" android:layout_gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView2" android:layout_column="1"
+                android:autoText="true" android:gravity="center" android:layout_gravity="center"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="left player"
+                android:id="@+id/court_lplayer" android:layout_column="0" android:layout_gravity="center"
+                android:gravity="center" android:layout_marginTop="30dp" android:clickable="true"
+                android:onClick="on_left_click"/>
+       <!-- <View android:id="@+id/paint"/>-->
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView" android:layout_column="1" android:src="@drawable/court"
+                android:layout_gravity="center" android:layout_margin="5dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="right player"
+                android:id="@+id/court_rplayer" android:layout_gravity="center" android:gravity="center"
+                android:layout_marginBottom="30dp" android:layout_column="2" android:onClick="on_right_click"
+                android:linksClickable="false" android:clickable="true"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_gravity="center" android:gravity="center">
+        <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_column="2"
+                  android:id="@+id/score"
+
+                  android:gravity="center"
+                  android:layout_margin="5dp"/>-->
+        <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_column="1" android:background="#420064" android:baselineAligned="true"
+                android:layout_gravity="center">
+            <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:gravity="center"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/score_lball" android:layout_marginLeft="5dp" android:layout_gravity="center"/>
+                <TextView
+                        android:text="left player"
+                        android:id="@+id/score_lplayer"
+                        android:layout_column="0"
+                        style="@style/score"/>
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_lsets"
+                        android:layout_column="1"
+                        style="@style/score"
+                        />
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_lgames"
+                        android:layout_column="2"
+                        style="@style/score"
+                        />
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_lpoints"
+                        android:layout_column="3"
+                        style="@style/score"
+                        />
+            </TableRow>
+            <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/score_rball" android:layout_marginLeft="5dp"/>
+                <TextView
+                        android:text="right player"
+                        android:id="@+id/score_rplayer"
+                        android:layout_column="0"
+                        style="@style/score"
+                        />
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_rsets"
+                        android:layout_column="1"
+                        style="@style/score"
+                        />
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_rgames"
+                        android:layout_column="2"
+                        style="@style/score"
+                        />
+                <TextView
+                        android:text=""
+                        android:id="@+id/score_rpoints"
+                        android:layout_column="3"
+                        style="@style/score"
+                        />
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+</TableLayout>

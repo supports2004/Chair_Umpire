@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tennis</string>
+    <string name="nameslabel">Введите имена игроков:</string>
+    <string name="player1">игрок1</string>
+    <string name="player2">игрок2</string>
+    <string name="next">Далее</string>
+    <string name="choicelabel">Введите результат жребия:</string><string name="back">Назад</string><string name="serve">Подача</string><string name="side">Сторона</string>
+    <string-array name="sideslist">
+        <item>left</item>
+        <item>right</item>
+    </string-array>
+
+</resources>

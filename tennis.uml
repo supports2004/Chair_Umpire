@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.example.tennis.Match</OriginalElement>
+  <nodes>
+    <node x="-429.75" y="-609.5">com.example.tennis.Umpire</node>
+    <node x="-259.0000000000001" y="-721.0000000000003">com.example.tennis.ICourt</node>
+    <node x="-518.0000000000001" y="-137.75">com.example.tennis.Game</node>
+    <node x="-14.000000000000114" y="-117.75">com.example.tennis.Set</node>
+    <node x="-246.0000000000001" y="-117.75">com.example.tennis.Match</node>
+    <node x="276.25" y="-552.0">com.example.tennis.IPlayer</node>
+    <node x="-388.0000000000001" y="-275.75">com.example.tennis.ACounter</node>
+    <node x="132.00000000000034" y="-246.75000000000006">com.example.tennis.TieBreak</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.tennis.Set" target="com.example.tennis.TieBreak">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.Umpire" target="com.example.tennis.IPlayer">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.Umpire" target="com.example.tennis.ICourt">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.Set" target="com.example.tennis.ACounter">
+      <point x="0.0" y="-24.0" />
+      <point x="91.99999999999989" y="-167.75" />
+      <point x="-174.5000000000001" y="-167.75" />
+      <point x="91.5" y="44.0" />
+    </edge>
+    <edge source="com.example.tennis.Umpire" target="com.example.tennis.Set">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.Match" target="com.example.tennis.ACounter">
+      <point x="0.0" y="-24.0" />
+      <point x="-140.0000000000001" y="-157.75" />
+      <point x="-235.5000000000001" y="-157.75" />
+      <point x="30.5" y="44.0" />
+    </edge>
+    <edge source="com.example.tennis.Game" target="com.example.tennis.ACounter">
+      <point x="0.0" y="-44.0" />
+      <point x="-392.0000000000001" y="-157.75" />
+      <point x="-296.5000000000001" y="-157.75" />
+      <point x="-30.5" y="44.0" />
+    </edge>
+    <edge source="com.example.tennis.Umpire" target="com.example.tennis.Game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.TieBreak" target="com.example.tennis.ACounter">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.example.tennis.Umpire" target="com.example.tennis.Match">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9999999999999997" x="31.000000000000227" y="-378.4999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
