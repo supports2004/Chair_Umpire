@@ -12,24 +12,41 @@ import java.util.Vector;
  * To change this template use File | Settings | File Templates.
  */
 public class Set extends ACounter {
-
+    private Integer _set_number = 0;
     public Set(ACounter game)
     {
         _child = game;
-        _set_start_score(new Runner() {public void run(IPlayer player){player.set_games("0");}});
+        _set_start_score(new Runner() {
+            public void run(IPlayer player) {
+                Vector<String> games = new Vector<String>();
+                games.add("0");
+                player.set_games(games.clone());
+            }
+        });
     }
+
 
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
         boolean result = false;
-        Integer w = (Integer) Integer.valueOf(wplayer.get_games());
-        Integer l = (Integer) Integer.valueOf(lplayer.get_games());
+        Vector<String> w_games = (Vector<String>) wplayer.get_games();
+        Vector<String> l_games = (Vector<String>) lplayer.get_games();
+        Integer w = (Integer) Integer.valueOf(w_games.elementAt(_set_number));
+        Integer l = (Integer) Integer.valueOf(l_games.elementAt(_set_number));
         w ++;
+        if ((w + l) % 2 != 0)
+        {
+            Umpire.get_instance().change_sides();
+        }
         if (w >= 6)
         {
             if (w - l > 1 || w == 7)
             {
+                w_games.set(_set_number, String.valueOf(w));
                 w = l = 0;
+                _set_number ++;
+                w_games.add(null);
+                l_games.add(null);
                 result = true;
             }
         }
@@ -37,8 +54,11 @@ public class Set extends ACounter {
         {
             _child = new TieBreak();
         }
-        wplayer.set_games(String.valueOf(w));
-        lplayer.set_games(String.valueOf(l));
+        w_games.set(_set_number, String.valueOf(w));
+        l_games.set(_set_number, String.valueOf(l));
+        wplayer.set_games(w_games);
+        lplayer.set_games(l_games);
+        Umpire.get_instance().change_serve();
         return result;
     }
 }

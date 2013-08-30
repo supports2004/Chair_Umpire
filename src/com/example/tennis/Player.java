@@ -1,16 +1,19 @@
 package com.example.tennis;
 
+import java.util.Vector;
+
 /**
  * Created with IntelliJ IDEA.
  * User: user
  * Date: 10.08.13
  * Time: 23:55
  * To change this template use File | Settings | File Templates.
+ * List<List<String>> words = new ArrayList<>();
  */
 public class Player implements IPlayer {
     private String _name;
     private String _points;
-    private String _games;
+    private Object _games;
     private String _sets;
     Player(String name)
     {
@@ -33,12 +36,13 @@ public class Player implements IPlayer {
         this._points = points;
     }
 
-    public String get_games() {
+    public Object get_games() {
         return _games;
     }
 
-    public void set_games(String games) {
-        this._games = games;
+
+    public void set_games(Object games) {
+        _games = games;
     }
 
     public String get_sets() {

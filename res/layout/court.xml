@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="left player"
                 android:id="@+id/court_lplayer" android:layout_column="0" android:layout_gravity="center"
-                android:gravity="center" android:layout_marginTop="30dp" android:clickable="true"
+                android:gravity="center"  android:clickable="true"
                 android:onClick="on_left_click"/>
        <!-- <View android:id="@+id/paint"/>-->
 
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="right player"
                 android:id="@+id/court_rplayer" android:layout_gravity="center" android:gravity="center"
-                android:layout_marginBottom="30dp" android:layout_column="2" android:onClick="on_right_click"
+                android:layout_column="2" android:onClick="on_right_click"
                 android:linksClickable="false" android:clickable="true"/>
     </TableRow>
     <TableRow

@@ -2,6 +2,8 @@ package com.example.tennis;
 
 import android.os.Parcelable;
 
+import java.util.Vector;
+
 /**
  * Created with IntelliJ IDEA.
  * User: user
@@ -16,8 +18,8 @@ interface IPlayer  {
     void set_points(String points);
     String get_points();
 
-    void set_games(String games);
-    String get_games();
+    void set_games(Object games);
+    Object get_games();
 
     void set_sets(String sets);
     String get_sets();
