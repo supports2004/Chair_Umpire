@@ -71,6 +71,16 @@ public class Court  extends Activity implements ICourt {
         _umpire.add_point(_umpire.get_right_player());
     }
 
+    public void onBackPressed()
+    {
+        _umpire.undo();
+    }
+
+    public void on_undo(View v)
+    {
+        _umpire.undo();
+    }
+
 
 
 

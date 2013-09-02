@@ -17,6 +17,7 @@ public class Umpire extends Application {
     private Integer  _serving_box;
     private Match _match;
     private ICourt _court;
+    private InstallScreen _installscreen;
     private Vector<Integer> _history = new Vector<Integer>();
 
 
@@ -28,11 +29,35 @@ public class Umpire extends Application {
         Log.w("Empire add_point", "launchered");
     }
 
+    public void undo()
+    {
+        _init_start_conditions();
+        if (_history.size() > 1)
+        {
+            for (Integer i = 0; i < _history.size() - 1; i ++)
+            {
+                _match.finish(_players[_history.get(i)], _players[_history.get(i) == 1 ? 0 : 1]);
+            }
+        }
+        _history.remove(_history.size());
+        _court.show();
+    }
+
     public void handle_from_installScreen(InstallScreen installScreen)
     {
+        _installscreen = installScreen;
         this._players[0] = new Player(installScreen.names[0]);
         this._players[1] = new Player(installScreen.names[1]);
-        if (installScreen.player1_side != 0)
+        _init_start_conditions();
+        Intent intent = new Intent(getApplicationContext(), Court.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        Log.w("startActivity", "launchered");
+    }
+
+    private void _init_start_conditions()
+    {
+        if (_installscreen.player1_side != 0)
         {
             this._left_player  = this._players[1];
             this._right_player = this._players[0];
@@ -42,13 +67,9 @@ public class Umpire extends Application {
             this._left_player  = this._players[0];
             this._right_player = this._players[1];
         }
-        this._serving_player = installScreen.player1_is_serve ? this._players[0] : this._players[1];
+        this._serving_player = _installscreen.player1_is_serve ? this._players[0] : this._players[1];
         _serving_box = 1;
         _match = new Match(new Set(new Game()));
-        Intent intent = new Intent(getApplicationContext(), Court.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        Log.w("startActivity", "launchered");
     }
 
 
