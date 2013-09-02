@@ -72,6 +72,8 @@ public class Court  extends Activity implements ICourt {
     }
 
 
+
+
     private String _get_lplayer_name()
     {
         return _umpire.get_serving_player() == _umpire.get_left_player() ? "*" + _umpire.get_left_player().get_name() : _umpire.get_left_player().get_name();

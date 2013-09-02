@@ -4,6 +4,8 @@ package com.example.tennis;
 import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
+import java.util.Arrays;
+import java.util.Vector;
 
 
 public class Umpire extends Application {
@@ -12,13 +14,15 @@ public class Umpire extends Application {
     private IPlayer   _left_player;
     private IPlayer   _right_player;
     private IPlayer   _serving_player;
-    private Integer  _serving_box = 1;
+    private Integer  _serving_box;
     private Match _match;
     private ICourt _court;
+    private Vector<Integer> _history = new Vector<Integer>();
 
 
     public void add_point(IPlayer win_player)
     {
+        _history.add(win_player == _players[0] ? 0 : 1);
         _match.finish(win_player, _left_player == win_player ? _right_player : _left_player);
         _court.show();
         Log.w("Empire add_point", "launchered");
@@ -39,6 +43,7 @@ public class Umpire extends Application {
             this._right_player = this._players[1];
         }
         this._serving_player = installScreen.player1_is_serve ? this._players[0] : this._players[1];
+        _serving_box = 1;
         _match = new Match(new Set(new Game()));
         Intent intent = new Intent(getApplicationContext(), Court.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

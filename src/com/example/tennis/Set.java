@@ -12,7 +12,6 @@ import java.util.Vector;
  * To change this template use File | Settings | File Templates.
  */
 public class Set extends ACounter {
-    private Integer _set_number = 0;
     public Set(ACounter game)
     {
         _child = game;
@@ -20,7 +19,7 @@ public class Set extends ACounter {
             public void run(IPlayer player) {
                 Vector<String> games = new Vector<String>();
                 games.add("0");
-                player.set_games(games.clone());
+                player.set_games(games);
             }
         });
     }
@@ -31,6 +30,7 @@ public class Set extends ACounter {
         boolean result = false;
         Vector<String> w_games = (Vector<String>) wplayer.get_games();
         Vector<String> l_games = (Vector<String>) lplayer.get_games();
+        Integer _set_number = w_games.size() - 1;
         Integer w = (Integer) Integer.valueOf(w_games.elementAt(_set_number));
         Integer l = (Integer) Integer.valueOf(l_games.elementAt(_set_number));
         w ++;
