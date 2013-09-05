@@ -27,6 +27,9 @@ public class Court extends Activity implements ICourt {
 
     public void show()
     {
+      //  TextView textPrim1 = new TextView(getApplicationContext());
+      //  TableRow row = (TableRow) findViewById(R.id.score_line1);
+    //    row.addView();
     //================== расположение игроков в нужные квадраты:
         if (_umpire.get_serving_box() == 1)
         {     Log.w("serving_box=1", "");

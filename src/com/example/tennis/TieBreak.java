@@ -33,6 +33,7 @@ public class TieBreak extends ACounter {
 
         if (w >= 7 && w - l > 1)
         {
+            w = l = 0;
             result = true;
             // тот кто подавал в тай брейке первым, в след. гейме должен принимать:
             if ((w + l) % 4 == 0 || (w + l) % 4 == 3 )

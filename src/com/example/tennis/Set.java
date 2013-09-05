@@ -43,6 +43,11 @@ public class Set extends ACounter {
         {
             if (w - l > 1 || w == 7)
             {
+                if (w == 7)
+                {
+                    // закончился тай брейк, следующий гейм - обычный:
+                    _child = new Game();
+                }
                 w_games.set(_set_number, String.valueOf(w));
                 w = l = 0;
                 _set_number ++;
@@ -50,15 +55,18 @@ public class Set extends ACounter {
                 l_games.add(null);
                 result = true;
             }
+            else if(w == 6 && l == 6)
+            {
+                _child = new TieBreak();
+            }
         }
-        if (w == 6 && l == 6)
-        {
-            _child = new TieBreak();
-        }
+
         w_games.set(_set_number, String.valueOf(w));
         l_games.set(_set_number, String.valueOf(l));
         wplayer.set_games(w_games);
         lplayer.set_games(l_games);
         return result;
     }
+
+
 }
