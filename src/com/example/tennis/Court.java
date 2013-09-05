@@ -11,11 +11,10 @@ import android.widget.TextView;
 import java.util.Vector;
 
 
-public class Court  extends Activity implements ICourt {
+public class Court extends Activity implements ICourt {
     private Umpire _umpire;
     private TableRow.LayoutParams _vertical_Lshift = new TableRow.LayoutParams();
     private TableRow.LayoutParams _vertical_Rshift = new TableRow.LayoutParams();
-    private Integer[] _pixels = {null, null};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,40 +45,62 @@ public class Court  extends Activity implements ICourt {
         ((TextView) findViewById(R.id.court_lplayer)).setText(this._get_lplayer_name());
         ((TextView) findViewById(R.id.court_rplayer)).setText(this._get_rplayer_name());
     //================== /Имена игроков по бокам от корта
+    //================================================== Таблица со счетом:
         IPlayer[] players = _umpire.get_players();
-        ((TextView) findViewById(R.id.score_lplayer)).setText(players[0].get_name());
-        ((TextView) findViewById(R.id.score_rplayer)).setText(players[1].get_name());
-        ((ImageView) findViewById(R.id.score_lball)).setImageResource(R.drawable.ball_small);
-        ((TextView) findViewById(R.id.score_lsets)).setText(_umpire.get_left_player().get_sets());
-        ((TextView) findViewById(R.id.score_rsets)).setText(_umpire.get_right_player().get_sets());
-        Vector<String> lgames = (Vector<String>) _umpire.get_left_player().get_games();
-        ((TextView) findViewById(R.id.score_lgames)).setText(lgames.lastElement());
-        Vector<String> rgames = (Vector<String>) _umpire.get_right_player().get_games();
-        ((TextView) findViewById(R.id.score_rgames)).setText(rgames.lastElement());
-
-
-        ((TextView) findViewById(R.id.score_lpoints)).setText(_umpire.get_left_player().get_points());
-        ((TextView) findViewById(R.id.score_rpoints)).setText(_umpire.get_right_player().get_points());
+        ((TextView) findViewById(R.id.score_1player)).setText(players[0].get_name());
+        ((TextView) findViewById(R.id.score_2player)).setText(players[1].get_name());
+        // мячик подачи перед именем:
+        if (players[0] == _umpire.get_serving_player())
+        {
+            ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small);
+            ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small_empty);
+        }
+        else
+        {
+            ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small_empty);
+            ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small);
+        }
+        // счет:
+        ((TextView) findViewById(R.id.score_1sets)).setText(players[0].get_sets());
+        ((TextView) findViewById(R.id.score_2sets)).setText(players[1].get_sets());
+        Vector<String> games1 = (Vector<String>) players[0].get_games();
+        ((TextView) findViewById(R.id.score_1games)).setText(games1.lastElement());
+        Vector<String> rgames2 = (Vector<String>) players[1].get_games();
+        ((TextView) findViewById(R.id.score_2games)).setText(rgames2.lastElement());
+        ((TextView) findViewById(R.id.score_1points)).setText(players[0].get_points());
+        ((TextView) findViewById(R.id.score_2points)).setText(players[1].get_points());
+        //============================================== /Таблица со счетом
     }
 
-    public void on_left_click(View v)
+    public void on_player_click(View v)
     {
-        _umpire.add_point(_umpire.get_left_player());
+        switch (v.getId())
+        {
+            case R.id.court_lplayer:
+                _umpire.add_point(_umpire.get_left_player());
+                break;
+            case R.id.court_rplayer:
+                _umpire.add_point(_umpire.get_right_player());
+                break;
+            case R.id.score_1player:
+                _umpire.add_point(_umpire.get_players()[0]);
+                break;
+            case R.id.score_2player:
+                _umpire.add_point(_umpire.get_players()[1]);
+                break;
+        }
     }
-    public void on_right_click(View v)
-    {
-        _umpire.add_point(_umpire.get_right_player());
-    }
+
 
     public void onBackPressed()
     {
-        _umpire.undo();
+        if (!_umpire.undo())
+        {
+            // очки на нулях, минусовать некуда, откатываемся на пред. экран:
+            super.onBackPressed();
+        }
     }
 
-    public void on_undo(View v)
-    {
-        _umpire.undo();
-    }
 
 
 

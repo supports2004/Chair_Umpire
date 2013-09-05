@@ -83,7 +83,7 @@ public class InstallScreen extends Activity {
         //String result = spinner.getSelectedItem().toString();
         this.player1_side = (int) spinner.getSelectedItemId();
         Umpire.get_instance().handle_from_installScreen(this);
-     //   setContentView(R.layout.court);
+     //   setContentView(R.layout.court_collapsed_sets);
    //     TextView sideresult = (TextView) findViewById(R.id.sideresult);
    //     sideresult.setText(String.valueOf(player1_side));
     }

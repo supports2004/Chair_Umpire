@@ -23,7 +23,7 @@
                 android:text="left player"
                 android:id="@+id/court_lplayer" android:layout_column="0" android:layout_gravity="center"
                 android:gravity="center"  android:clickable="true"
-                android:onClick="on_left_click"/>
+                android:onClick="on_player_click"/>
        <!-- <View android:id="@+id/paint"/>-->
 
         <ImageView
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="right player"
                 android:id="@+id/court_rplayer" android:layout_gravity="center" android:gravity="center"
-                android:layout_column="2" android:onClick="on_right_click"
+                android:layout_column="2" android:onClick="on_player_click"
                 android:linksClickable="false" android:clickable="true"/>
     </TableRow>
     <TableRow
@@ -61,62 +61,63 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/score_lball" android:layout_marginLeft="5dp" android:layout_gravity="center"/>
+                        android:id="@+id/score_1ball" android:layout_marginLeft="5dp" android:layout_gravity="center"/>
                 <TextView
                         android:text="left player"
-                        android:id="@+id/score_lplayer"
+                        android:id="@+id/score_1player"
                         android:layout_column="0"
-                        style="@style/score"/>
+                        style="@style/score" android:clickable="true" android:onClick="on_player_click"/>
                 <TextView
                         android:text=""
-                        android:id="@+id/score_lsets"
+                        android:id="@+id/score_1sets"
                         android:layout_column="1"
                         style="@style/score"
                         />
                 <TextView
                         android:text=""
-                        android:id="@+id/score_lgames"
+                        android:id="@+id/score_1games"
                         android:layout_column="2"
                         style="@style/score"
                         />
                 <TextView
                         android:text=""
-                        android:id="@+id/score_lpoints"
+                        android:id="@+id/score_1points"
                         android:layout_column="3"
                         style="@style/score"
-                        />
+                        android:width="30dp"/>
             </TableRow>
             <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center">
+                    android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center"
+                    android:clickable="true" android:onClick="on_player_click">
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/score_rball" android:layout_marginLeft="5dp"/>
+                        android:id="@+id/score_2ball" android:layout_marginLeft="5dp" android:layout_gravity="center"/>
                 <TextView
                         android:text="right player"
-                        android:id="@+id/score_rplayer"
+                        android:id="@+id/score_2player"
                         android:layout_column="0"
                         style="@style/score"
-                        />
+                        android:clickable="true" android:onClick="on_player_click"/>
                 <TextView
                         android:text=""
-                        android:id="@+id/score_rsets"
+                        android:id="@+id/score_2sets"
                         android:layout_column="1"
                         style="@style/score"
                         />
                 <TextView
                         android:text=""
-                        android:id="@+id/score_rgames"
+                        android:id="@+id/score_2games"
                         android:layout_column="2"
                         style="@style/score"
                         />
                 <TextView
                         android:text=""
-                        android:id="@+id/score_rpoints"
+                        android:id="@+id/score_2points"
                         android:layout_column="3"
                         style="@style/score"
-                        />
+                        android:width="30dp"/>
             </TableRow>
         </TableLayout>
     </TableRow>

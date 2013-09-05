@@ -4,7 +4,7 @@ package com.example.tennis;
 import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
-import java.util.Arrays;
+
 import java.util.Vector;
 
 
@@ -29,18 +29,26 @@ public class Umpire extends Application {
         Log.w("Empire add_point", "launchered");
     }
 
-    public void undo()
+    public boolean undo()
     {
-        _init_start_conditions();
-        if (_history.size() > 1)
+        if (_history.size() >= 1)
         {
-            for (Integer i = 0; i < _history.size() - 1; i ++)
+            _init_start_conditions();
+            if (_history.size() > 1)
             {
-                _match.finish(_players[_history.get(i)], _players[_history.get(i) == 1 ? 0 : 1]);
+                for (Integer i = 0; i < _history.size() - 1; i ++)
+                {
+                    _match.finish(_players[_history.get(i)], _players[_history.get(i) == 1 ? 0 : 1]);
+                }
             }
+            _history.remove(_history.size() - 1);
+            _court.show();
+            return true;
         }
-        _history.remove(_history.size());
-        _court.show();
+        else
+        {
+            return false;
+        }
     }
 
     public void handle_from_installScreen(InstallScreen installScreen)

@@ -59,7 +59,13 @@ public class Game extends ACounter {
         wplayer.set_points(_to_visual(w));
         lplayer.set_points(_to_visual(l));
         if (result == false || Umpire.get_instance().get_serving_box() == 2)
-        Umpire.get_instance().change_serving_box();
+        {
+            Umpire.get_instance().change_serving_box();
+        }
+        if (result == true)
+        {
+            Umpire.get_instance().change_serve();
+        }
         return result;
     }
 

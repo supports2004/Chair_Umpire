@@ -38,6 +38,7 @@ public class Set extends ACounter {
         {
             Umpire.get_instance().change_sides();
         }
+        // TODO: if ((w = 6 && w - 1 > 1) || w == 7)
         if (w >= 6)
         {
             if (w - l > 1 || w == 7)
@@ -58,7 +59,6 @@ public class Set extends ACounter {
         l_games.set(_set_number, String.valueOf(l));
         wplayer.set_games(w_games);
         lplayer.set_games(l_games);
-        Umpire.get_instance().change_serve();
         return result;
     }
 }
