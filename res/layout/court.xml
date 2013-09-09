@@ -33,7 +33,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView" android:layout_column="1" android:src="@drawable/court"
+                android:id="@+id/court" android:layout_column="1"
                 android:layout_gravity="center" android:layout_margin="5dp"/>
         <TextView
                 android:layout_width="wrap_content"
