@@ -20,11 +20,15 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="left player"
+                android:text="leftplayer"
                 android:id="@+id/court_lplayer" android:layout_column="0" android:layout_gravity="center"
                 android:gravity="center"  android:clickable="true"
-                android:onClick="on_player_click"/>
+                android:onClick="on_player_click" android:singleLine="false"
+                android:textStyle="bold" android:paddingTop="5dp"
+                android:paddingBottom="5dp" android:password="false"
+                android:maxLines="1" android:maxWidth="70dp" android:minWidth="70dp"/>
        <!-- <View android:id="@+id/paint"/>-->
+
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -34,10 +38,12 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="right player"
+                android:text="rightplayer"
                 android:id="@+id/court_rplayer" android:layout_gravity="center" android:gravity="center"
                 android:layout_column="2" android:onClick="on_player_click"
-                android:linksClickable="false" android:clickable="true"/>
+                android:linksClickable="false" android:clickable="true"
+                android:paddingTop="5dp" android:paddingBottom="5dp" android:password="false" android:textStyle="bold"
+                android:maxWidth="70dp" android:minWidth="70dp" android:maxLines="1"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"
@@ -52,12 +58,12 @@
                 xmlns:android="http://schemas.android.com/apk/res/android"
 
                 android:layout_column="1" android:background="#420064" android:baselineAligned="true"
-                android:layout_gravity="center">
+                android:layout_gravity="center_vertical|left">
             <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:gravity="center"
                     android:layout_gravity="center"
-                    android:id="@+id/score_line1">
+                    android:id="@+id/score_line1" android:clickable="true" android:onClick="on_player_click">
 
                 <ImageView
                         android:layout_width="wrap_content"
@@ -66,26 +72,18 @@
                 <TextView
                         android:text="left player"
                         android:id="@+id/score_1player"
-                        android:layout_column="0"
-                        style="@style/score" android:clickable="true" android:onClick="on_player_click"/>
-                <TextView
-                        android:text=""
-                        android:id="@+id/score_1sets"
-                        android:layout_column="1"
-                        style="@style/score"
-                        />
-                <TextView
-                        android:text=""
-                        android:id="@+id/score_1games"
-                        android:layout_column="2"
-                        style="@style/score"
-                        />
+
+                        style="@style/score" android:clickable="true" android:onClick="on_player_click"
+                        android:layout_marginRight="20dp" android:paddingRight="10dp" android:editable="true"
+                        android:shadowColor="@android:color/black"/>
+
                 <TextView
                         android:text=""
                         android:id="@+id/score_1points"
-                        android:layout_column="3"
+
                         style="@style/score"
-                        android:width="30dp"/>
+                        android:width="30dp" android:background="#1b0264" android:gravity="center"
+                        android:shadowColor="@android:color/darker_gray" android:textColor="#cbd300"/>
             </TableRow>
             <TableRow
                     android:layout_width="wrap_content"
@@ -99,27 +97,17 @@
                 <TextView
                         android:text="right player"
                         android:id="@+id/score_2player"
-                        android:layout_column="0"
-                        style="@style/score"
-                        android:clickable="true" android:onClick="on_player_click"/>
-                <TextView
-                        android:text=""
-                        android:id="@+id/score_2sets"
-                        android:layout_column="1"
-                        style="@style/score"
-                        />
-                <TextView
-                        android:text=""
-                        android:id="@+id/score_2games"
-                        android:layout_column="2"
-                        style="@style/score"
-                        />
+
+                        android:clickable="true" android:onClick="on_player_click"
+                        style="@style/score" android:paddingRight="10dp"/>
+
                 <TextView
                         android:text=""
                         android:id="@+id/score_2points"
-                        android:layout_column="3"
+
                         style="@style/score"
-                        android:width="30dp"/>
+                        android:width="30dp" android:background="#1b0264" android:autoText="true"
+                        android:gravity="center" android:textColor="#cbd300"/>
             </TableRow>
         </TableLayout>
     </TableRow>

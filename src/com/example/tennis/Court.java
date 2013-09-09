@@ -1,6 +1,8 @@
 package com.example.tennis;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,20 +15,35 @@ import java.util.Vector;
 
 public class Court extends Activity implements ICourt {
     private Umpire _umpire;
+    private Context _gContext;
+    private Vector<TextView[]> _games = new Vector<TextView[]>();
     private TableRow.LayoutParams _vertical_Lshift = new TableRow.LayoutParams();
     private TableRow.LayoutParams _vertical_Rshift = new TableRow.LayoutParams();
+    TableRow[] _score_lines = {null, null};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Umpire.get_instance().set_court(this);
         Log.w("Court.onCreate", "launchered");
         _umpire = Umpire.get_instance();
+        _gContext = getApplicationContext();
         setContentView(R.layout.court);
+        _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
+        _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
+
+
+
+
+
         show();
     }
 
     public void show()
     {
+/*        Resources mRes = _gContext.getResources();
+        Integer identifierID = mRes.getIdentifier("picture", "drawable", _gContext.getPackageName());*/
+
       //  TextView textPrim1 = new TextView(getApplicationContext());
       //  TableRow row = (TableRow) findViewById(R.id.score_line1);
     //    row.addView();
@@ -64,12 +81,13 @@ public class Court extends Activity implements ICourt {
             ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small);
         }
         // счет:
-        ((TextView) findViewById(R.id.score_1sets)).setText(players[0].get_sets());
+        _dynamic_sets();
+/*        ((TextView) findViewById(R.id.score_1sets)).setText(players[0].get_sets());
         ((TextView) findViewById(R.id.score_2sets)).setText(players[1].get_sets());
         Vector<String> games1 = (Vector<String>) players[0].get_games();
         ((TextView) findViewById(R.id.score_1games)).setText(games1.lastElement());
         Vector<String> rgames2 = (Vector<String>) players[1].get_games();
-        ((TextView) findViewById(R.id.score_2games)).setText(rgames2.lastElement());
+        ((TextView) findViewById(R.id.score_2games)).setText(rgames2.lastElement());*/
         ((TextView) findViewById(R.id.score_1points)).setText(players[0].get_points());
         ((TextView) findViewById(R.id.score_2points)).setText(players[1].get_points());
         //============================================== /Таблица со счетом
@@ -86,9 +104,11 @@ public class Court extends Activity implements ICourt {
                 _umpire.add_point(_umpire.get_right_player());
                 break;
             case R.id.score_1player:
+            case R.id.score_line1:
                 _umpire.add_point(_umpire.get_players()[0]);
                 break;
             case R.id.score_2player:
+            case R.id.score_line2:
                 _umpire.add_point(_umpire.get_players()[1]);
                 break;
         }
@@ -110,10 +130,48 @@ public class Court extends Activity implements ICourt {
 
     private String _get_lplayer_name()
     {
-        return _umpire.get_serving_player() == _umpire.get_left_player() ? "*" + _umpire.get_left_player().get_name() : _umpire.get_left_player().get_name();
+        return _umpire.get_serving_player() == _umpire.get_left_player() ? "*" + _umpire.get_left_player().get_name() :  " " + _umpire.get_left_player().get_name();
     }
     private String _get_rplayer_name()
     {
-        return _umpire.get_serving_player() == _umpire.get_right_player() ? "*" + _umpire.get_right_player().get_name() : _umpire.get_right_player().get_name();
+        return _umpire.get_serving_player() == _umpire.get_right_player() ? "*" + _umpire.get_right_player().get_name() : _umpire.get_right_player().get_name() + " ";
+    }
+
+    private void _dynamic_sets()
+    {
+        int sets_amount = ((Vector) _umpire.get_players()[0].get_games()).size(); // сыгранные + текущий сет
+        int games_size = _games.size();
+        if (sets_amount < games_size)
+        {    // в результате undo уменьшилось количество сетов:
+             for (int i = sets_amount; i < games_size; i ++)
+             {
+                 _score_lines[0].removeView(_games.lastElement()[0]);
+                 _score_lines[1].removeView(_games.lastElement()[1]);
+                 _games.remove(_games.lastElement());
+             }
+        }
+        else if (sets_amount > games_size)
+        {   // игроки сыграли очередной сет или игра только началась:
+            for (int i = games_size; i < sets_amount; i ++)
+            {
+                TextView[] column = {new TextView(getApplicationContext()), new TextView(getApplicationContext())};
+                for (int row = 0; row < 2; row ++)
+                {
+                    _score_lines[row].addView(column[row], 2 + i);
+                    column[row].setTextAppearance(this, R.style.score);
+                    column[row].setPadding(10,0,10,0);
+
+                }
+                _games.add(column);
+            }
+        }
+        for (int i = 0; i < _games.size(); i ++)
+        {
+            for (int row = 0; row < 2; row ++)
+            {
+                _games.get(i)[row].setText(((Vector<String>) _umpire.get_players()[row].get_games()).get(i));
+            }
+
+        }
     }
 }
