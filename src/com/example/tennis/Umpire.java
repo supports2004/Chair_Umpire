@@ -19,6 +19,7 @@ public class Umpire extends Application {
     private ICourt _court;
     private InstallScreen _installscreen;
     private Vector<Integer> _history = new Vector<Integer>();
+    private boolean _is_tiebreak = false;
 
 
     public void add_point(IPlayer win_player)
@@ -134,6 +135,14 @@ public class Umpire extends Application {
 
     public void set_court(ICourt _court) {
         this._court = _court;
+    }
+
+    public boolean is_tiebreak() {
+        return _is_tiebreak;
+    }
+
+    public void set_is_tiebreak(boolean _is_tiebreak) {
+        this._is_tiebreak = _is_tiebreak;
     }
 
 }

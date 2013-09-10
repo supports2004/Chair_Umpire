@@ -47,6 +47,7 @@ public class Set extends ACounter {
                 {
                     // закончился тай брейк, следующий гейм - обычный:
                     _child = new Game();
+                    Umpire.get_instance().set_is_tiebreak(false);
                 }
                 w_games.set(_set_number, String.valueOf(w));
                 w = l = 0;
@@ -58,6 +59,7 @@ public class Set extends ACounter {
             else if(w == 6 && l == 6)
             {
                 _child = new TieBreak();
+                Umpire.get_instance().set_is_tiebreak(true);
             }
         }
 

@@ -8,6 +8,10 @@ package com.example.tennis;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class ACounter {
+    public ACounter get_child() {
+        return _child;
+    }
+
     protected ACounter _child = null;
 
     public boolean finish(IPlayer wplayer, IPlayer lplayer)
