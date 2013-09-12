@@ -73,7 +73,7 @@ public class Court extends Activity implements ICourt {
     //    row.addView();
     //================== расположение игроков в нужные квадраты:
         if (_umpire.get_serving_box() == 1)
-        {     Log.w("serving_box=1", "");
+        {
             _vertical_Lshift.topMargin = _vertical_Rshift.bottomMargin = 30;
             _vertical_Rshift.topMargin = _vertical_Lshift.bottomMargin = 0;
         }
