@@ -1,8 +1,6 @@
 package com.example.tennis;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,18 +21,18 @@ public class Court extends Activity implements ICourt {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Umpire.get_instance().set_court(this);
         Log.w("Court.onCreate", "launchered");
+        super.onCreate(savedInstanceState);
         _umpire = Umpire.get_instance();
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        _umpire.init_court(this);
         setContentView(R.layout.court);
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
         _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
-
-
-
-
-
         show();
     }
 

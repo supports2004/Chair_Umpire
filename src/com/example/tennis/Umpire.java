@@ -5,11 +5,14 @@ import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 
 public class Umpire extends Application {
     private static Umpire _instance;
+    public Map<String,  Object> request;
     private IPlayer[] _players = {null, null};
     private IPlayer   _left_player;
     private IPlayer   _right_player;
@@ -66,7 +69,7 @@ public class Umpire extends Application {
 
     private void _init_start_conditions()
     {
-        if (_installscreen.player1_side != 0)
+        if (((Integer)request.get("player1_side")) != 0)
         {
             this._left_player  = this._players[1];
             this._right_player = this._players[0];
@@ -76,7 +79,7 @@ public class Umpire extends Application {
             this._left_player  = this._players[0];
             this._right_player = this._players[1];
         }
-        this._serving_player = _installscreen.player1_is_serve ? this._players[0] : this._players[1];
+        this._serving_player = ((Boolean) request.get("player1_is_serve")) ? this._players[0] : this._players[1];
         _serving_box = 1;
         _match = new Match(new Set(new Game()));
     }
@@ -129,12 +132,22 @@ public class Umpire extends Application {
     @Override
     public final void onCreate()
     {
+
+        request = new Hashtable<String, Object>();
+        String[] names = {"", ""};
+        request.put("names", names);
+        request.put("player1_side", 0);
+        request.put("player1_is_serve", true);
         super.onCreate();
         _instance = this;
     }
 
-    public void set_court(ICourt _court) {
+    public void init_court(ICourt _court) {
         this._court = _court;
+        this._players[0] = new Player(((String[])request.get("names"))[0]);
+        this._players[1] = new Player(((String[])request.get("names"))[1]);
+        _init_start_conditions();
+        Log.w("init_court", "launchered");
     }
 
     public boolean is_tiebreak() {

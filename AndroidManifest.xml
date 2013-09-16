@@ -5,17 +5,30 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="7"/>
     <application android:label="@string/app_name" android:name=".Umpire">
-        <activity android:name=".InstallScreen"
+        <!--<activity android:name=".InstallScreen"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity>-->
 
         <activity android:name=".Court"
                   android:label="@string/app_name">
 
+        </activity>
+
+        <activity android:name=".ChoiceActivity"
+                  android:label="@string/app_name">
+
+        </activity>
+
+        <activity android:name=".PlayerNamesActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
 
