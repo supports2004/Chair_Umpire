@@ -1,8 +1,6 @@
 package com.example.tennis;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
@@ -11,60 +9,33 @@ import android.widget.TextView;
 import java.util.Vector;
 
 
-public class Court extends Activity implements ICourt {
+public class CourtActivity extends Activity implements ICourt {
     private Umpire _umpire;
     private Vector<TextView[]> _games = new Vector<TextView[]>();
     private TableRow.LayoutParams _vertical_Lshift = new TableRow.LayoutParams();
     private TableRow.LayoutParams _vertical_Rshift = new TableRow.LayoutParams();
     private Integer[] _court_images = {R.drawable.court_left_1,R.drawable.court_left_2,R.drawable.court_right_1,R.drawable.court_right_2};
-    TableRow[] _score_lines = {null, null};
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.w("Court.onCreate", "launchered");
-        super.onCreate(savedInstanceState);
-        _umpire = Umpire.get_instance();
-    }
+    private TableRow[] _score_lines = {null, null};
+    private ImageView _court_img;
 
     public void onResume()
     {
         super.onResume();
-        _umpire.init_court(this);
         setContentView(R.layout.court);
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
         _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
-        show();
+        _court_img = (ImageView) findViewById(R.id.court);
+        _umpire = Umpire.get_instance();
+        _umpire.init_court(this);
     }
 
     public void show()
     {
-
 /*        Resources mRes = getApplicationContext().getResources();
         Integer identifierID = mRes.getIdentifier("picture", "drawable", getApplicationContext().getPackageName());*/
+        // выбираем одно из черырех изображений корта:
+        _court_img.setImageResource(_court_images[_umpire.get_serving_box() + (_umpire.get_left_player() == _umpire.get_serving_player() ? -1 : 1)]);
 
-        ImageView court = (ImageView) findViewById(R.id.court);
-        if (_umpire.get_left_player() == _umpire.get_serving_player())
-        {
-            if (_umpire.get_serving_box() == 1)
-            {
-                court.setImageResource(_court_images[0]);
-            }
-            else
-            {
-                court.setImageResource(_court_images[1]);
-            }
-        }
-        else
-        {
-            if (_umpire.get_serving_box() == 1)
-            {
-                court.setImageResource(_court_images[2]);
-            }
-            else
-            {
-                court.setImageResource(_court_images[3]);
-            }
-        }
 
       //  TextView textPrim1 = new TextView(getApplicationContext());
       //  TableRow row = (TableRow) findViewById(R.id.score_line1);

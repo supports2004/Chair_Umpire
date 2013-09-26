@@ -30,38 +30,34 @@ public class Set extends ACounter {
         boolean result = false;
         Vector<String> w_games = (Vector<String>) wplayer.get_games();
         Vector<String> l_games = (Vector<String>) lplayer.get_games();
-        Integer _set_number = w_games.size() - 1;
-        Integer w = (Integer) Integer.valueOf(w_games.elementAt(_set_number));
-        Integer l = (Integer) Integer.valueOf(l_games.elementAt(_set_number));
+        int _set_number = w_games.size() - 1;
+        int w = (int) Integer.valueOf(w_games.elementAt(_set_number));
+        int l = (int) Integer.valueOf(l_games.elementAt(_set_number));
         w ++;
         if ((w + l) % 2 != 0)
         {
             Umpire.get_instance().change_sides();
         }
-        // TODO: if ((w = 6 && w - 1 > 1) || w == 7)
-        if (w >= 6)
+
+        if ((w == 6 && w - l > 1) || w == 7)
         {
-            if (w - l > 1 || w == 7)
+            if (w == 7)
             {
-                if (w == 7)
-                {
-                    // закончился тай брейк, следующий гейм - обычный:
-                    _child = new Game();
-                    Umpire.get_instance().set_is_tiebreak(false);
-                }
-                w_games.set(_set_number, String.valueOf(w));
-                w = l = 0;
-                _set_number ++;
-                w_games.add(null);
-                l_games.add(null);
-                result = true;
+                // закончился тай брейк, следующий гейм - обычный:
+                _child = new Game();
             }
-            else if(w == 6 && l == 6)
-            {
-                _child = new TieBreak();
-                Umpire.get_instance().set_is_tiebreak(true);
-            }
+            w_games.set(_set_number, String.valueOf(w));
+            w = l = 0;
+            _set_number ++;
+            w_games.add(null);
+            l_games.add(null);
+            result = true;
         }
+        else if(w == 6 && l == 6)
+        {
+            _child = new TieBreak();
+        }
+
 
         w_games.set(_set_number, String.valueOf(w));
         l_games.set(_set_number, String.valueOf(l));

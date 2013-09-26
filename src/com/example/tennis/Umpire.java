@@ -20,7 +20,6 @@ public class Umpire extends Application {
     private Integer  _serving_box;
     private Match _match;
     private ICourt _court;
-    private InstallScreen _installscreen;
     private Vector<Integer> _history = new Vector<Integer>();
     private boolean _is_tiebreak = false;
 
@@ -53,18 +52,6 @@ public class Umpire extends Application {
         {
             return false;
         }
-    }
-
-    public void handle_from_installScreen(InstallScreen installScreen)
-    {
-        _installscreen = installScreen;
-        this._players[0] = new Player(installScreen.names[0]);
-        this._players[1] = new Player(installScreen.names[1]);
-        _init_start_conditions();
-        Intent intent = new Intent(getApplicationContext(), Court.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        Log.w("startActivity", "launchered");
     }
 
     private void _init_start_conditions()
@@ -147,12 +134,11 @@ public class Umpire extends Application {
         this._players[0] = new Player(((String[])request.get("names"))[0]);
         this._players[1] = new Player(((String[])request.get("names"))[1]);
         _init_start_conditions();
+        _court.show();
         Log.w("init_court", "launchered");
     }
 
-    public boolean is_tiebreak() {
-        return _is_tiebreak;
-    }
+
 
     public void set_is_tiebreak(boolean _is_tiebreak) {
         this._is_tiebreak = _is_tiebreak;

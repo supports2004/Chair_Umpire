@@ -5,10 +5,12 @@
     <string name="player1">игрок1</string>
     <string name="player2">игрок2</string>
     <string name="next">Далее</string>
-    <string name="choicelabel">Введите результат жребия:</string><string name="back">Назад</string><string name="serve">Подача</string><string name="side">Сторона</string>
+    <string name="choicelabel">Введите результат жребия:</string><string name="back">Назад</string>
+    <string name="serve">Подача</string>
+    <string name="side">Сторона</string>
     <string-array name="sideslist">
-        <item>left</item>
-        <item>right</item>
+        <item>слева</item>
+        <item>справа</item>
     </string-array>
 
 </resources>

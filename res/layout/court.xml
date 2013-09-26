@@ -26,7 +26,8 @@
                 android:onClick="on_player_click" android:singleLine="false"
                 android:textStyle="bold" android:paddingTop="5dp"
                 android:paddingBottom="5dp" android:password="false"
-                android:maxLines="1" android:maxWidth="70dp" android:minWidth="70dp"/>
+                android:maxLines="1" android:maxWidth="70dp" android:minWidth="70dp"
+                android:textColorHighlight="#69ff2b" android:textSize="17dp"/>
        <!-- <View android:id="@+id/paint"/>-->
 
 
@@ -43,7 +44,8 @@
                 android:layout_column="2" android:onClick="on_player_click"
                 android:linksClickable="false" android:clickable="true"
                 android:paddingTop="5dp" android:paddingBottom="5dp" android:password="false" android:textStyle="bold"
-                android:maxWidth="70dp" android:minWidth="70dp" android:maxLines="1"/>
+                android:maxWidth="70dp" android:minWidth="70dp" android:maxLines="1"
+                android:textColorHighlight="#69ff2b" android:textSize="17dp"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"
@@ -78,7 +80,6 @@
                         android:shadowColor="@android:color/black"/>
 
                 <TextView
-                        android:text=""
                         android:id="@+id/score_1points"
 
                         style="@style/score"

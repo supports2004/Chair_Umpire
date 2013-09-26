@@ -61,11 +61,7 @@ public class ChoiceActivity extends Activity {
         Umpire.get_instance().request.put("player1_is_serve", serve1.isChecked());
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);
         Umpire.get_instance().request.put("player1_side", (int) spinner.getSelectedItemId());
-        Intent intent = new Intent(getApplicationContext(), Court.class);
+        Intent intent = new Intent(getApplicationContext(), CourtActivity.class);
         startActivity(intent);
-      //  Umpire.get_instance().handle_from_installScreen(this);
-        //   setContentView(R.layout.court_collapsed_sets);
-        //     TextView sideresult = (TextView) findViewById(R.id.sideresult);
-        //     sideresult.setText(String.valueOf(player1_side));
     }
 }
