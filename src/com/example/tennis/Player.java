@@ -15,10 +15,6 @@ public class Player implements IPlayer {
     private String _points;
     private Object _games;
     private String _sets;
-    Player(String name)
-    {
-        this.set_name(name);
-    }
 
     public void set_name(String name) {
         this._name = name;

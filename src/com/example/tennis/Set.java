@@ -1,7 +1,5 @@
 package com.example.tennis;
 
-import android.util.Log;
-
 import java.util.Vector;
 
 /**
@@ -12,16 +10,16 @@ import java.util.Vector;
  * To change this template use File | Settings | File Templates.
  */
 public class Set extends ACounter {
-    public Set(ACounter game)
+    public Set()
     {
-        _child = game;
         _set_start_score(new Runner() {
             public void run(IPlayer player) {
-                Vector<String> games = new Vector<String>();
+                Vector<String> games = (Vector<String>) player.get_games();
                 games.add("0");
                 player.set_games(games);
             }
         });
+        _child = myApp.create_game();
     }
 
 
@@ -30,37 +28,31 @@ public class Set extends ACounter {
         boolean result = false;
         Vector<String> w_games = (Vector<String>) wplayer.get_games();
         Vector<String> l_games = (Vector<String>) lplayer.get_games();
-        int _set_number = w_games.size() - 1;
-        int w = (int) Integer.valueOf(w_games.elementAt(_set_number));
-        int l = (int) Integer.valueOf(l_games.elementAt(_set_number));
+        int set_number = w_games.size() - 1;
+        int w = (int) Integer.valueOf(w_games.elementAt(set_number));
+        int l = (int) Integer.valueOf(l_games.elementAt(set_number));
         w ++;
         if ((w + l) % 2 != 0)
         {
-            Umpire.get_instance().change_sides();
+            myApp.get_umpire().change_sides();
         }
 
         if ((w == 6 && w - l > 1) || w == 7)
         {
-            if (w == 7)
-            {
-                // закончился тай брейк, следующий гейм - обычный:
-                _child = new Game();
-            }
-            w_games.set(_set_number, String.valueOf(w));
-            w = l = 0;
-            _set_number ++;
-            w_games.add(null);
-            l_games.add(null);
             result = true;
         }
         else if(w == 6 && l == 6)
         {
-            _child = new TieBreak();
+            _child = myApp.create_tiebreak();
+        }
+        else
+        {
+            _child = myApp.create_game();
         }
 
 
-        w_games.set(_set_number, String.valueOf(w));
-        l_games.set(_set_number, String.valueOf(l));
+        w_games.set(set_number, String.valueOf(w));
+        l_games.set(set_number, String.valueOf(l));
         wplayer.set_games(w_games);
         lplayer.set_games(l_games);
         return result;

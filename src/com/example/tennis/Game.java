@@ -1,7 +1,5 @@
 package com.example.tennis;
 
-import android.util.Log;
-
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -44,7 +42,6 @@ public class Game extends ACounter {
         if (w > 3 && w - l > 1)
         {
             result = true;
-            w = l = 0;
         }
         if (w == 4 && l == 4)
         {
@@ -58,13 +55,13 @@ public class Game extends ACounter {
 
         wplayer.set_points(_to_visual(w));
         lplayer.set_points(_to_visual(l));
-        if (result == false || Umpire.get_instance().get_serving_box() == 2)
+        if (result == false || myApp.get_umpire().get_serving_box() == 2)
         {
-            Umpire.get_instance().change_serving_box();
+            myApp.get_umpire().change_serving_box();
         }
         if (result == true)
         {
-            Umpire.get_instance().change_serve();
+            myApp.get_umpire().change_serve();
         }
         return result;
     }
@@ -80,10 +77,6 @@ public class Game extends ACounter {
 
     protected String _to_visual(Integer points)
     {
-        if (!_int_visual.containsKey(points))
-        {
-         //   throw new Exception("Integer point value " + points + " doesn`t exist");
-        }
         return _int_visual.get(points);
     }
 }

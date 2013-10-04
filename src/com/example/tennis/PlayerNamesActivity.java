@@ -17,17 +17,17 @@ public class PlayerNamesActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.players_screen);
-        // вбиваем в поля по умолчанию имена, хранящиеся в Umpire:
+        // вбиваем в поля по умолчанию имена, хранящиеся в myApp:
         TextView player_namel = (TextView) findViewById(R.id.player1);
         TextView player_name2 = (TextView) findViewById(R.id.player2);
-        player_namel.setText(((String[]) Umpire.get_instance().request.get("names"))[0]);
-        player_name2.setText(((String[]) Umpire.get_instance().request.get("names"))[1]);
+        player_namel.setText(((String[]) myApp.get_umpire().request.get("names"))[0]);
+        player_name2.setText(((String[]) myApp.get_umpire().request.get("names"))[1]);
     }
 
     public void onSubmit(View v)
     {
         String[] names = {((TextView) findViewById(R.id.player1)).getText().toString(), ((TextView) findViewById(R.id.player2)).getText().toString()};
-        Umpire.get_instance().request.put("names", names);
+        myApp.get_umpire().request.put("names", names);
         Intent intent = new Intent(getApplicationContext(), ChoiceActivity.class);
         startActivity(intent);
     }

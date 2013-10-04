@@ -1,5 +1,7 @@
 package com.example.tennis;
 
+import java.util.Vector;
+
 /**
  * Created with IntelliJ IDEA.
  * User: user
@@ -9,11 +11,16 @@ package com.example.tennis;
  */
 public class Match extends ACounter {
 
-    public Match(ACounter set)
+    public Match()
     {
-        _child = set;
-        _set_start_score(new Runner() {public void run(IPlayer player){player.set_sets("0");}});
+        _set_start_score(new Runner() {public void run(IPlayer player){
+            player.set_sets("0");
+            Vector<String> games = new Vector<String>();
+            player.set_games(games);
+        }});
+        _child = myApp.create_set();
     }
+
 
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
@@ -27,6 +34,7 @@ public class Match extends ACounter {
         }
         wplayer.set_sets(String.valueOf(w));
         lplayer.set_sets(String.valueOf(l));
+        _child = myApp.create_set();
         return result;
     }
 }

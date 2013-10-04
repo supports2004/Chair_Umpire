@@ -25,7 +25,7 @@ public class CourtActivity extends Activity implements ICourt {
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
         _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
         _court_img = (ImageView) findViewById(R.id.court);
-        _umpire = Umpire.get_instance();
+        _umpire = myApp.get_umpire();
         _umpire.init_court(this);
     }
 

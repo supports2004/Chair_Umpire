@@ -40,16 +40,16 @@ public class ChoiceActivity extends Activity {
         // имена игроков перед радиобатонами выбора подачи:
         TextView choice_namel = (TextView) findViewById(R.id.name1);
         TextView choice_name2 = (TextView) findViewById(R.id.name2);
-        choice_namel.setText(((String[]) Umpire.get_instance().request.get("names"))[0]);
-        choice_name2.setText(((String[]) Umpire.get_instance().request.get("names"))[1]);
+        choice_namel.setText(((String[]) myApp.get_umpire().request.get("names"))[0]);
+        choice_name2.setText(((String[]) myApp.get_umpire().request.get("names"))[1]);
         // ликвидируем множественный выбор в радиобаттонах подачи:
         RadioButton serve1 = (RadioButton) findViewById(R.id.serve1);
         RadioButton serve2 = (RadioButton)findViewById(R.id.serve2);
         // при возврате устанавливаем радиобатоны подачи в положение с учетом предыдущего выбора:
-        serve1.setChecked(((Boolean) Umpire.get_instance().request.get("player1_is_serve")));
-        serve2.setChecked(((Boolean) Umpire.get_instance().request.get("player1_is_serve")) ? false : true);
+        serve1.setChecked(((Boolean) myApp.get_umpire().request.get("player1_is_serve")));
+        serve2.setChecked(((Boolean) myApp.get_umpire().request.get("player1_is_serve")) ? false : true);
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);
-        spinner.setSelection(((Integer)Umpire.get_instance().request.get("player1_side")));
+        spinner.setSelection(((Integer) myApp.get_umpire().request.get("player1_side")));
 
         serve1.setOnClickListener(radioListener);
         serve2.setOnClickListener(radioListener);
@@ -58,9 +58,9 @@ public class ChoiceActivity extends Activity {
     public void onSubmit(View v)
     {
         RadioButton serve1 = (RadioButton) findViewById(R.id.serve1);
-        Umpire.get_instance().request.put("player1_is_serve", serve1.isChecked());
+        myApp.get_umpire().request.put("player1_is_serve", serve1.isChecked());
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);
-        Umpire.get_instance().request.put("player1_side", (int) spinner.getSelectedItemId());
+        myApp.get_umpire().request.put("player1_side", (int) spinner.getSelectedItemId());
         Intent intent = new Intent(getApplicationContext(), CourtActivity.class);
         startActivity(intent);
     }

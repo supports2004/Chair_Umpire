@@ -1,8 +1,5 @@
 package com.example.tennis;
 
-import com.example.tennis.ACounter;
-import com.example.tennis.IPlayer;
-
 /**
  * Created with IntelliJ IDEA.
  * User: user
@@ -12,7 +9,10 @@ import com.example.tennis.IPlayer;
  */
 public class TieBreak extends ACounter {
 
-
+    public TieBreak()
+    {
+        _set_start_score(new Runner() {public void run(IPlayer player){player.set_points("0");}});
+    }
 
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
@@ -23,36 +23,35 @@ public class TieBreak extends ACounter {
         w ++;
         if ((w + l) % 2 != 0)
         {
-            Umpire.get_instance().change_serve();
+            myApp.get_umpire().change_serve();
         }
 
         if ((w + l) % 6 == 0)
         {   // меняем сторонами после каждых 6 розыгрышей:
-            Umpire.get_instance().change_sides();
+            myApp.get_umpire().change_sides();
         }
 
         if (w >= 7 && w - l > 1)
         {
-            w = l = 0;
             result = true;
             // тот кто подавал в тай брейке первым, в след. гейме должен принимать:
             if ((w + l) % 4 == 0 || (w + l) % 4 == 3 )
             {
                 // сет закончился на подаче игрока, который первый подавал, передаем подачу:
-                Umpire.get_instance().change_serve();
+                myApp.get_umpire().change_serve();
             }
             // возвращаем расположение сторон в исходную перед началом тай брейка:
             if (((int)Math.floor(((double)(w + l)) / 6)) % 2 == 1 )
             {
                 // было нечетное число смен сторон в течение тайбрейка:
-                Umpire.get_instance().change_sides();
+                myApp.get_umpire().change_sides();
             }
         }
         wplayer.set_points(String.valueOf(w));
         lplayer.set_points(String.valueOf(l));
-        if (result == false || Umpire.get_instance().get_serving_box() == 2)
+        if (result == false || myApp.get_umpire().get_serving_box() == 2)
         {
-            Umpire.get_instance().change_serving_box();
+            myApp.get_umpire().change_serving_box();
         }
         return result;
     }

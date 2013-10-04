@@ -1,8 +1,5 @@
 package com.example.tennis;
 
-
-import android.app.Application;
-import android.content.Intent;
 import android.util.Log;
 
 import java.util.Hashtable;
@@ -10,8 +7,8 @@ import java.util.Map;
 import java.util.Vector;
 
 
-public class Umpire extends Application {
-    private static Umpire _instance;
+
+public class Umpire implements IUmpire {
     public Map<String,  Object> request;
     private IPlayer[] _players = {null, null};
     private IPlayer   _left_player;
@@ -21,7 +18,16 @@ public class Umpire extends Application {
     private Match _match;
     private ICourt _court;
     private Vector<Integer> _history = new Vector<Integer>();
-    private boolean _is_tiebreak = false;
+
+    public Umpire()
+    {
+        request = new Hashtable<String, Object>();
+        String[] names = {"", ""};
+        request.put("names", names);
+        request.put("player1_side", 0);
+        request.put("player1_is_serve", true);
+        Log.w("Umpire construct", "launchered");
+    }
 
 
     public void add_point(IPlayer win_player)
@@ -54,6 +60,8 @@ public class Umpire extends Application {
         }
     }
 
+
+
     private void _init_start_conditions()
     {
         if (((Integer)request.get("player1_side")) != 0)
@@ -68,7 +76,7 @@ public class Umpire extends Application {
         }
         this._serving_player = ((Boolean) request.get("player1_is_serve")) ? this._players[0] : this._players[1];
         _serving_box = 1;
-        _match = new Match(new Set(new Game()));
+        _match = myApp.create_match();
     }
 
 
@@ -112,36 +120,17 @@ public class Umpire extends Application {
     }
 
 
-    public static Umpire get_instance()
-    {
-        return _instance;
-    }
-    @Override
-    public final void onCreate()
-    {
 
-        request = new Hashtable<String, Object>();
-        String[] names = {"", ""};
-        request.put("names", names);
-        request.put("player1_side", 0);
-        request.put("player1_is_serve", true);
-        super.onCreate();
-        _instance = this;
-    }
 
     public void init_court(ICourt _court) {
         this._court = _court;
-        this._players[0] = new Player(((String[])request.get("names"))[0]);
-        this._players[1] = new Player(((String[])request.get("names"))[1]);
+        this._players[0] = myApp.create_player();
+        this._players[1] = myApp.create_player();
+        this._players[0].set_name(((String[])request.get("names"))[0]);
+        this._players[1].set_name(((String[])request.get("names"))[1]);
         _init_start_conditions();
         _court.show();
         Log.w("init_court", "launchered");
-    }
-
-
-
-    public void set_is_tiebreak(boolean _is_tiebreak) {
-        this._is_tiebreak = _is_tiebreak;
     }
 
 }

@@ -8,9 +8,7 @@ package com.example.tennis;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class ACounter {
-    public ACounter get_child() {
-        return _child;
-    }
+
 
     protected ACounter _child = null;
 
@@ -25,7 +23,7 @@ public abstract class ACounter {
 
     static void _set_start_score(Runner runner)
     {
-        IPlayer[] players = Umpire.get_instance().get_players();
+        IPlayer[] players = myApp.get_umpire().get_players();
         for (Integer i = 0; i < players.length; i ++)
         {
             runner.run(players[i]);
@@ -35,6 +33,7 @@ public abstract class ACounter {
 
 
     protected abstract boolean _count(IPlayer wplayer, IPlayer lplayer);
+
 }
 
 interface Runner {
