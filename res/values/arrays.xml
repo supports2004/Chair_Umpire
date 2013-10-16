@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="digits">
+        <item>первый</item>
+        <item>второй</item>
+        <item>третий</item>
+        <item>четвертый</item>
+        <item>пятый</item>
+        <item>шестой</item>
+        <item>седьмой</item>
+        <item>восьмой</item>
+        <item>девятый</item>
+        <item>десятый</item>
+        <item>одиннадцатый</item>
+        <item>двенадцатый</item>
+        <item>тринадцатый</item>
+        <item>четырнадцтый</item>
+        <item>пятнадцатый</item>
+        <item>шестнадцатый</item>
+        <item>семнадцатый</item>
+        <item>восемнадцатый</item>
+        <item>девятнадцатый</item>
+    </string-array>
+</resources>

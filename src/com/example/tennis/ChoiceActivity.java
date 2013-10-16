@@ -61,7 +61,7 @@ public class ChoiceActivity extends Activity {
         myApp.get_umpire().request.put("player1_is_serve", serve1.isChecked());
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);
         myApp.get_umpire().request.put("player1_side", (int) spinner.getSelectedItemId());
-        Intent intent = new Intent(getApplicationContext(), CourtActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FormatActivity.class);
         startActivity(intent);
     }
 }

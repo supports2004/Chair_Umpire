@@ -19,7 +19,7 @@ public class Set extends ACounter {
                 player.set_games(games);
             }
         });
-        _child = myApp.create_game();
+        _child = myApp.get_umpire().create_game();
     }
 
 
@@ -43,11 +43,11 @@ public class Set extends ACounter {
         }
         else if(w == 6 && l == 6)
         {
-            _child = myApp.create_tiebreak();
+            _child = myApp.get_umpire().create_tiebreak();
         }
         else
         {
-            _child = myApp.create_game();
+            _child = myApp.get_umpire().create_game();
         }
 
 

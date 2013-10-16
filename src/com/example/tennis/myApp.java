@@ -32,9 +32,9 @@ public class myApp extends Application {
         return new Set();
     }
 
-    public static Game create_game()
+    public static Game create_game(boolean AD)
     {
-        return new Game();
+        return new Game(AD);
     }
 
     public static TieBreak create_tiebreak()

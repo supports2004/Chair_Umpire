@@ -1,14 +1,16 @@
 package com.example.tennis;
 
+
 import android.util.Log;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Vector;
 
 
 
-public class Umpire implements IUmpire {
+public class Umpire extends Observable implements IUmpire {
     public Map<String,  Object> request;
     private IPlayer[] _players = {null, null};
     private IPlayer   _left_player;
@@ -26,10 +28,12 @@ public class Umpire implements IUmpire {
         request.put("names", names);
         request.put("player1_side", 0);
         request.put("player1_is_serve", true);
+        request.put("AD", true);
         Log.w("Umpire construct", "launchered");
     }
 
 
+    @Override
     public void add_point(IPlayer win_player)
     {
         _history.add(win_player == _players[0] ? 0 : 1);
@@ -38,6 +42,7 @@ public class Umpire implements IUmpire {
         Log.w("Empire add_point", "launchered");
     }
 
+    @Override
     public boolean undo()
     {
         if (_history.size() >= 1)
@@ -76,42 +81,50 @@ public class Umpire implements IUmpire {
         }
         this._serving_player = ((Boolean) request.get("player1_is_serve")) ? this._players[0] : this._players[1];
         _serving_box = 1;
-        _match = myApp.create_match();
+        _match = _create_match();
     }
 
 
+    @Override
     public IPlayer[] get_players()
     {
         return _players;
     }
 
+    @Override
     public IPlayer get_left_player() {
         return _left_player;
     }
 
+    @Override
     public IPlayer get_right_player() {
         return _right_player;
     }
 
+    @Override
     public IPlayer get_serving_player() {
         return _serving_player;
     }
 
+    @Override
     public Integer get_serving_box()
     {
         return _serving_box;
     }
 
+    @Override
     public void change_serve()
     {
         _serving_player = _serving_player == _left_player ? _right_player : _left_player;
     }
 
+    @Override
     public void change_serving_box()
     {
         _serving_box = _serving_box == 1 ? 2 : 1;
     }
 
+    @Override
     public void change_sides()
     {
         IPlayer left_player = _left_player;
@@ -119,9 +132,41 @@ public class Umpire implements IUmpire {
         _right_player = left_player;
     }
 
+    private void _notify(Event event)
+    {
+        setChanged();
+        notifyObservers(event);
+    }
+
+    private Match _create_match()
+    {
+        _notify(Event.NEW_MATCH);
+        return myApp.create_match();
+    }
+
+    @Override
+    public Set create_set()
+    {
+        _notify(Event.NEW_SET);
+        return myApp.create_set();
+    }
+
+    @Override
+    public Game create_game()
+    {
+        _notify(Event.NEW_GAME);
+        return myApp.create_game((Boolean) request.get("AD"));
+    }
+
+    @Override
+    public TieBreak create_tiebreak()
+    {
+        _notify(Event.NEW_TIEBREAK);
+        return myApp.create_tiebreak();
+    }
 
 
-
+    @Override
     public void init_court(ICourt _court) {
         this._court = _court;
         this._players[0] = myApp.create_player();
@@ -132,6 +177,8 @@ public class Umpire implements IUmpire {
         _court.show();
         Log.w("init_court", "launchered");
     }
+
+
 
 }
 

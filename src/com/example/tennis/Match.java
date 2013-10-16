@@ -18,7 +18,7 @@ public class Match extends ACounter {
             Vector<String> games = new Vector<String>();
             player.set_games(games);
         }});
-        _child = myApp.create_set();
+        _child = myApp.get_umpire().create_set();
     }
 
 
@@ -34,7 +34,7 @@ public class Match extends ACounter {
         }
         wplayer.set_sets(String.valueOf(w));
         lplayer.set_sets(String.valueOf(l));
-        _child = myApp.create_set();
+        _child = myApp.get_umpire().create_set();
         return result;
     }
 }

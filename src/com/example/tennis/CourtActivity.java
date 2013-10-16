@@ -1,15 +1,19 @@
 package com.example.tennis;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 
-public class CourtActivity extends Activity implements ICourt {
+public class CourtActivity extends Activity implements ICourt, Observer {
     private Umpire _umpire;
     private Vector<TextView[]> _games = new Vector<TextView[]>();
     private TableRow.LayoutParams _vertical_Lshift = new TableRow.LayoutParams();
@@ -17,20 +21,57 @@ public class CourtActivity extends Activity implements ICourt {
     private Integer[] _court_images = {R.drawable.court_left_1,R.drawable.court_left_2,R.drawable.court_right_1,R.drawable.court_right_2};
     private TableRow[] _score_lines = {null, null};
     private ImageView _court_img;
+    private int _setsnum;
+    private int _gamessnum;
+    private String _header;
+    private String[] _str_digits;
+    private boolean _dynamic_sets_marker = false;
 
-    public void onResume()
+
+    public void update(Observable observable, Object event)
     {
-        super.onResume();
+        switch ((IUmpire.Event) event)
+        {
+            case NEW_MATCH:
+                _setsnum = 0;
+                break;
+            case NEW_SET:
+                _setsnum ++;
+                _gamessnum = 0;
+                break;
+            case NEW_GAME:
+                _dynamic_sets_marker = true;
+                _gamessnum ++;
+                _header = String.format(getString(R.string.set_game), _get_str_digit(_setsnum), _get_str_digit(_gamessnum));
+                break;
+            case NEW_TIEBREAK:
+                _dynamic_sets_marker = true;
+                _header = String.format(getString(R.string.set_tiebreak), _get_str_digit(_setsnum));
+                break;
+        }
+    }
+
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        _str_digits = getResources().getStringArray(R.array.digits);
         setContentView(R.layout.court);
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
         _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
         _court_img = (ImageView) findViewById(R.id.court);
         _umpire = myApp.get_umpire();
+        _umpire.addObserver(this);
+    }
+
+    public void onResume()
+    {
+        super.onResume();
         _umpire.init_court(this);
     }
 
     public void show()
     {
+        ((TextView) findViewById(R.id.header)).setText(_header);
 /*        Resources mRes = getApplicationContext().getResources();
         Integer identifierID = mRes.getIdentifier("picture", "drawable", getApplicationContext().getPackageName());*/
         // выбираем одно из черырех изображений корта:
@@ -74,7 +115,12 @@ public class CourtActivity extends Activity implements ICourt {
             ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small);
         }
         // счет:
-        _dynamic_sets();
+        if (_dynamic_sets_marker)
+        {
+            _dynamic_sets();
+            Log.w("_dynamic_sets", "launchered");
+            _dynamic_sets_marker = false;
+        }
 /*        ((TextView) findViewById(R.id.score_1sets)).setText(players[0].get_sets());
         ((TextView) findViewById(R.id.score_2sets)).setText(players[1].get_sets());
         Vector<String> games1 = (Vector<String>) players[0].get_games();
@@ -165,6 +211,19 @@ public class CourtActivity extends Activity implements ICourt {
                 _games.get(i)[row].setText(((Vector<String>) _umpire.get_players()[row].get_games()).get(i));
             }
 
+        }
+    }
+
+    private String _get_str_digit(Integer d)
+    {
+        d = -- d;
+        if (d >= _str_digits.length )
+        {
+            return d.toString();
+        }
+        else
+        {
+            return _str_digits[d];
         }
     }
 }

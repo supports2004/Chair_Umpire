@@ -4,11 +4,13 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class Game extends ACounter {
+    private boolean _AD = true;
     static protected Map<String,  Integer> _visual_int = null;
     static protected Map<Integer, String>  _int_visual = null;
 
-    public Game()
+    public Game(boolean AD)
     {
+        _AD = AD;
         if (_visual_int == null)
         {
             _visual_int = new Hashtable<String, Integer>();
@@ -39,18 +41,28 @@ public class Game extends ACounter {
         Integer w = _to_int(wplayer.get_points());
         Integer l = _to_int(lplayer.get_points());
         w ++;
-        if (w > 3 && w - l > 1)
+        if (!_AD)
         {
-            result = true;
+            if (w > 3)
+            {
+                result = true;
+            }
         }
-        if (w == 4 && l == 4)
+        else
         {
-            w --;
-            l --;
-        }
-        if (w == 4 && l == 3)
-        {
-            l = 35;     // '40' : 'AD' => '' : 'AD'
+            if (w > 3 && w - l > 1)
+            {
+                result = true;
+            }
+            if (w == 4 && l == 4)
+            {
+                w --;
+                l --;
+            }
+            if (w == 4 && l == 3)
+            {
+                l = 35;     // '40' : 'AD' => '' : 'AD'
+            }
         }
 
         wplayer.set_points(_to_visual(w));

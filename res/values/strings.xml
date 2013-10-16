@@ -5,12 +5,20 @@
     <string name="player1">игрок1</string>
     <string name="player2">игрок2</string>
     <string name="next">Далее</string>
-    <string name="choicelabel">Введите результат жребия:</string><string name="back">Назад</string>
+    <string name="choicelabel">Введите результат жребия:</string>
     <string name="serve">Подача</string>
     <string name="side">Сторона</string>
+    <string name="formatlabel">Формат игры:</string>
+    <string name="gametype">тип геймов:</string>
+
+    <string name="AD">больше-меньше</string>
+    <string name="noAD">с розыгрышем решающего очка</string>
+
     <string-array name="sideslist">
         <item>слева</item>
         <item>справа</item>
     </string-array>
+    <string name="set_game">%1$s сет, %2$s гейм</string>
+    <string name="set_tiebreak">%1$s сет, тайбрейк</string>
 
 </resources>
