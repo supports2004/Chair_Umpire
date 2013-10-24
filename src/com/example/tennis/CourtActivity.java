@@ -2,11 +2,12 @@ package com.example.tennis;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +26,10 @@ public class CourtActivity extends Activity implements ICourt, Observer {
     private int _gamessnum;
     private String _header;
     private String[] _str_digits;
-    private boolean _dynamic_sets_marker = false;
+    private boolean _new_game_event = true;
+    private boolean _change_serve_event = true;
+    private boolean _change_sides_event = true;
+
 
 
     public void update(Observable observable, Object event)
@@ -40,14 +44,18 @@ public class CourtActivity extends Activity implements ICourt, Observer {
                 _gamessnum = 0;
                 break;
             case NEW_GAME:
-                _dynamic_sets_marker = true;
+                _new_game_event = true;
                 _gamessnum ++;
                 _header = String.format(getString(R.string.set_game), _get_str_digit(_setsnum), _get_str_digit(_gamessnum));
                 break;
             case NEW_TIEBREAK:
-                _dynamic_sets_marker = true;
+                _new_game_event = true;
                 _header = String.format(getString(R.string.set_tiebreak), _get_str_digit(_setsnum));
                 break;
+            case CHANGE_SERVE:
+                _change_serve_event = true;
+            case CHANGE_SIDES:
+                _change_sides_event = true;
         }
     }
 
@@ -67,11 +75,14 @@ public class CourtActivity extends Activity implements ICourt, Observer {
     {
         super.onResume();
         _umpire.init_court(this);
+        ((TextView) findViewById(R.id.score_1player)).setText(_umpire.get_players()[0].get_name());
+        ((TextView) findViewById(R.id.score_2player)).setText(_umpire.get_players()[1].get_name());
     }
 
     public void show()
     {
-        ((TextView) findViewById(R.id.header)).setText(_header);
+        //((TextView) findViewById(R.id.header)).setText(_header);
+        setTitle(_header);
 /*        Resources mRes = getApplicationContext().getResources();
         Integer identifierID = mRes.getIdentifier("picture", "drawable", getApplicationContext().getPackageName());*/
         // выбираем одно из черырех изображений корта:
@@ -96,30 +107,35 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         ((TextView) findViewById(R.id.court_rplayer)).setLayoutParams(_vertical_Rshift);
     //================== /расположение игроков в нужные квадраты
     //================== Имена игроков по бокам от корта:
-        ((TextView) findViewById(R.id.court_lplayer)).setText(this._get_lplayer_name());
-        ((TextView) findViewById(R.id.court_rplayer)).setText(this._get_rplayer_name());
+        if (_change_sides_event )
+        {
+            ((TextView) findViewById(R.id.court_lplayer)).setText(this._get_lplayer_name());
+            ((TextView) findViewById(R.id.court_rplayer)).setText(this._get_rplayer_name());
+            _change_sides_event = false;
+        }
     //================== /Имена игроков по бокам от корта
     //================================================== Таблица со счетом:
         IPlayer[] players = _umpire.get_players();
-        ((TextView) findViewById(R.id.score_1player)).setText(players[0].get_name());
-        ((TextView) findViewById(R.id.score_2player)).setText(players[1].get_name());
         // мячик подачи перед именем:
-        if (players[0] == _umpire.get_serving_player())
+        if (_change_serve_event)
         {
-            ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small);
-            ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small_empty);
-        }
-        else
-        {
-            ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small_empty);
-            ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small);
+            if (players[0] == _umpire.get_serving_player())
+            {
+                ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small);
+                ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small_empty);
+            }
+            else
+            {
+                ((ImageView) findViewById(R.id.score_1ball)).setImageResource(R.drawable.ball_small_empty);
+                ((ImageView) findViewById(R.id.score_2ball)).setImageResource(R.drawable.ball_small);
+            }
+            _change_serve_event = false;
         }
         // счет:
-        if (_dynamic_sets_marker)
+        if (_new_game_event)
         {
             _dynamic_sets();
-            Log.w("_dynamic_sets", "launchered");
-            _dynamic_sets_marker = false;
+            _new_game_event = false;
         }
 /*        ((TextView) findViewById(R.id.score_1sets)).setText(players[0].get_sets());
         ((TextView) findViewById(R.id.score_2sets)).setText(players[1].get_sets());
@@ -127,10 +143,13 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         ((TextView) findViewById(R.id.score_1games)).setText(games1.lastElement());
         Vector<String> rgames2 = (Vector<String>) players[1].get_games();
         ((TextView) findViewById(R.id.score_2games)).setText(rgames2.lastElement());*/
+
         ((TextView) findViewById(R.id.score_1points)).setText(players[0].get_points());
         ((TextView) findViewById(R.id.score_2points)).setText(players[1].get_points());
         //============================================== /Таблица со счетом
     }
+
+
 
     public void on_player_click(View v)
     {
@@ -225,5 +244,16 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         {
             return _str_digits[d];
         }
+    }
+
+
+
+
+
+    private void _show_toast(String msg)
+    {
+        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

@@ -10,7 +10,7 @@ package com.example.tennis;
 public interface IUmpire {
     public enum Event
     {
-        NEW_MATCH, NEW_SET, NEW_GAME, NEW_TIEBREAK
+        NEW_MATCH, NEW_SET, NEW_GAME, NEW_TIEBREAK, CHANGE_SERVE, CHANGE_SIDES
     }
     void add_point(IPlayer win_player);
 

@@ -27,9 +27,9 @@ public class myApp extends Application {
         return new Match();
     }
 
-    public static Set create_set()
+    public static Set create_set(int games_in_set)
     {
-        return new Set();
+        return new Set(games_in_set);
     }
 
     public static Game create_game(boolean AD)

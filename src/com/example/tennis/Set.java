@@ -10,7 +10,8 @@ import java.util.Vector;
  * To change this template use File | Settings | File Templates.
  */
 public class Set extends ACounter {
-    public Set()
+    private int _games_to_win;  // default = 6
+    public Set(int games_to_win)
     {
         _set_start_score(new Runner() {
             public void run(IPlayer player) {
@@ -20,6 +21,7 @@ public class Set extends ACounter {
             }
         });
         _child = myApp.get_umpire().create_game();
+        _games_to_win = games_to_win;
     }
 
 
@@ -37,11 +39,11 @@ public class Set extends ACounter {
             myApp.get_umpire().change_sides();
         }
 
-        if ((w == 6 && w - l > 1) || w == 7)
+        if ((w == _games_to_win && w - l > 1) || w == _games_to_win + 1)
         {
             result = true;
         }
-        else if(w == 6 && l == 6)
+        else if(w == _games_to_win && l == _games_to_win)
         {
             _child = myApp.get_umpire().create_tiebreak();
         }

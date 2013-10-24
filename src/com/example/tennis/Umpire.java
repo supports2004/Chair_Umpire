@@ -1,7 +1,10 @@
 package com.example.tennis;
 
 
+import android.app.Activity;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -29,6 +32,7 @@ public class Umpire extends Observable implements IUmpire {
         request.put("player1_side", 0);
         request.put("player1_is_serve", true);
         request.put("AD", true);
+        request.put("games_in_set", 6);
         Log.w("Umpire construct", "launchered");
     }
 
@@ -115,18 +119,20 @@ public class Umpire extends Observable implements IUmpire {
     @Override
     public void change_serve()
     {
+        _notify(Event.CHANGE_SERVE);
         _serving_player = _serving_player == _left_player ? _right_player : _left_player;
     }
 
     @Override
     public void change_serving_box()
-    {
+    {   ((Activity) _court).getApplicationContext();
         _serving_box = _serving_box == 1 ? 2 : 1;
     }
 
     @Override
     public void change_sides()
     {
+        _notify(Event.CHANGE_SIDES);
         IPlayer left_player = _left_player;
         _left_player = _right_player;
         _right_player = left_player;
@@ -148,7 +154,7 @@ public class Umpire extends Observable implements IUmpire {
     public Set create_set()
     {
         _notify(Event.NEW_SET);
-        return myApp.create_set();
+        return myApp.create_set((Integer) request.get("games_in_set"));
     }
 
     @Override
@@ -177,8 +183,5 @@ public class Umpire extends Observable implements IUmpire {
         _court.show();
         Log.w("init_court", "launchered");
     }
-
-
-
 }
 
