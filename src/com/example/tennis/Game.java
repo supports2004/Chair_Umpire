@@ -31,18 +31,22 @@ public class Game extends ACounter {
 
 
         }
-        _set_start_score(new Runner() {public void run(IPlayer player){player.set_points("0");}});
+        _set_start_score(new Runner() {public void run(IPlayer player){player.set_points(0);}});
 
     }
 
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
         boolean result = false;
-        Integer w = _to_int(wplayer.get_points());
-        Integer l = _to_int(lplayer.get_points());
+        Integer w = (wplayer.get_points());
+        Integer l = (lplayer.get_points());
         w ++;
         if (!_AD)
         {
+            if (w == 3 && l == 3)
+            {
+                myApp.get_umpire().notify(IUmpire.Event.DECIDING_POINT);
+            }
             if (w > 3)
             {
                 result = true;
@@ -59,14 +63,10 @@ public class Game extends ACounter {
                 w --;
                 l --;
             }
-            if (w == 4 && l == 3)
-            {
-                l = 35;     // '40' : 'AD' => '' : 'AD'
-            }
         }
 
-        wplayer.set_points(_to_visual(w));
-        lplayer.set_points(_to_visual(l));
+        wplayer.set_points(w);
+        lplayer.set_points(l);
         if (result == false || myApp.get_umpire().get_serving_box() == 2)
         {
             myApp.get_umpire().change_serving_box();

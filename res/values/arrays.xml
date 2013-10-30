@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="digits">
+    <string-array name="points">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>40</item>
+        <item>AD</item>
+    </string-array>
+
+    <string-array name="spell_points">
+        <item>ноль</item>
+        <item>пятнадцать</item>
+        <item>тридцать</item>
+        <item>сорок</item>
+        <item>меньше</item>
+        <item>ровно</item>
+        <item>больше</item>
+        <item>по пятнадцати</item>
+    </string-array>
+
+    <string-array name="skolko">
+        <item>ноль</item>
+        <item>один</item>
+        <item>два</item>
+        <item>три</item>
+        <item>четыре</item>
+        <item>пять</item>
+        <item>шесть</item>
+        <item>семь</item>
+        <item>восемь</item>
+        <item>девять</item>
+        <item>десять</item>
+    </string-array>
+
+
+    <string-array name="kakoi_po_schetu">
         <item></item>
         <item>первый</item>
         <item>второй</item>
@@ -12,14 +46,34 @@
         <item>восьмой</item>
         <item>девятый</item>
         <item>десятый</item>
-        <item>одиннадцатый</item>
-        <item>двенадцатый</item>
-        <item>тринадцатый</item>
-        <item>четырнадцтый</item>
-        <item>пятнадцатый</item>
-        <item>шестнадцатый</item>
-        <item>семнадцатый</item>
-        <item>восемнадцатый</item>
-        <item>девятнадцатый</item>
+    </string-array>
+
+
+    <string-array name="po_skolki">
+        <item>нулям</item>
+        <item>одному</item>
+        <item>двум</item>
+        <item>трем</item>
+        <item>четырем</item>
+        <item>пяти</item>
+        <item>шести</item>
+        <item>семи</item>
+        <item>восьми</item>
+        <item>девяти</item>
+        <item>десяти</item>
+    </string-array>
+
+    <string-array name="v_kakom_po_schetu">
+        <item></item>
+        <item>первом</item>
+        <item>втором</item>
+        <item>третьем</item>
+        <item>четвертом</item>
+        <item>пятом</item>
+        <item>шестом</item>
+        <item>седьмом</item>
+        <item>восьмом</item>
+        <item>девятом</item>
+        <item>десятом</item>
     </string-array>
 </resources>

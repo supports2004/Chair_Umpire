@@ -15,8 +15,8 @@ public class Set extends ACounter {
     {
         _set_start_score(new Runner() {
             public void run(IPlayer player) {
-                Vector<String> games = (Vector<String>) player.get_games();
-                games.add("0");
+                Vector<Integer> games = player.get_games();
+                games.add(0);
                 player.set_games(games);
             }
         });
@@ -28,12 +28,16 @@ public class Set extends ACounter {
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
         boolean result = false;
-        Vector<String> w_games = (Vector<String>) wplayer.get_games();
-        Vector<String> l_games = (Vector<String>) lplayer.get_games();
+        Vector<Integer> w_games =  wplayer.get_games();
+        Vector<Integer> l_games =  lplayer.get_games();
         int set_number = w_games.size() - 1;
-        int w = (int) Integer.valueOf(w_games.elementAt(set_number));
-        int l = (int) Integer.valueOf(l_games.elementAt(set_number));
+        int w = w_games.elementAt(set_number);
+        int l = l_games.elementAt(set_number);
         w ++;
+        w_games.set(set_number, w);
+        l_games.set(set_number, l);
+        wplayer.set_games(w_games);
+        lplayer.set_games(l_games);
         if ((w + l) % 2 != 0)
         {
             myApp.get_umpire().change_sides();
@@ -53,10 +57,7 @@ public class Set extends ACounter {
         }
 
 
-        w_games.set(set_number, String.valueOf(w));
-        l_games.set(set_number, String.valueOf(l));
-        wplayer.set_games(w_games);
-        lplayer.set_games(l_games);
+
         return result;
     }
 

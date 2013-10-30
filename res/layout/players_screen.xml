@@ -5,9 +5,10 @@
               android:layout_height="wrap_content"
         >
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nameslabel"
+            android:layout_gravity="center"
             />
     <EditText
             android:layout_width="fill_parent"
@@ -24,10 +25,72 @@
             android:layout_height="fill_parent"
             android:text="@string/player2"
             android:id="@+id/player2" android:layout_gravity="center"/>
-    <Button
+  <!--  <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            android:id="@+id/button" android:layout_gravity="center" android:onClick="onSubmit"/>
+            android:id="@+id/button" android:layout_gravity="center" android:onClick="onSubmit"/>-->
+
+    <!-- ==============================================================from FormatActivity:-->
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/formatlabel"
+            android:id="@+id/textView" android:layout_gravity="center"/>
+    <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center">
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gametype"
+                    android:id="@+id/textView1" android:layout_gravity="center" android:paddingRight="4dp"/>
+            <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/AD"
+                        android:id="@+id/AD" android:checked="true" android:textSize="14dp"/>
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/noAD"
+                        android:id="@+id/noAD" android:checked="false" android:textSize="14dp"/>
+            </RadioGroup>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="100dp"
+                    android:text="@string/settype"
+                    android:id="@+id/textView1" android:layout_gravity="center" android:paddingRight="4dp"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/games_in_set" android:layout_column="1"  android:text="6"
+                    android:maxWidth="1dp" android:clickable="true" android:editable="true" android:enabled="true"/>
+
+
+        </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:layout_gravity="center"
+                    android:id="@+id/button" android:onClick="onSubmit" android:layout_column="1"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
 

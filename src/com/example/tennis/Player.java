@@ -12,9 +12,9 @@ import java.util.Vector;
  */
 public class Player implements IPlayer {
     private String _name;
-    private String _points;
-    private Object _games;
-    private String _sets;
+    private Integer _points;
+    private Vector<Integer> _games;
+    private Integer _sets;
 
     public void set_name(String name) {
         this._name = name;
@@ -24,28 +24,28 @@ public class Player implements IPlayer {
         return _name;
     }
 
-    public String get_points() {
+    public Integer get_points() {
         return _points;
     }
 
-    public void set_points(String points) {
+    public void set_points(Integer points) {
         this._points = points;
     }
 
-    public Object get_games() {
+    public Vector<Integer> get_games() {
         return _games;
     }
 
 
-    public void set_games(Object games) {
+    public void set_games(Vector<Integer> games) {
         _games = games;
     }
 
-    public String get_sets() {
+    public Integer get_sets() {
         return _sets;
     }
 
-    public void set_sets(String sets) {
+    public void set_sets(Integer sets) {
         this._sets = sets;
     }
 }

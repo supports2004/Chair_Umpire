@@ -8,61 +8,23 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/formatlabel"
+            android:text="@string/prefslabel"
             android:id="@+id/textView" android:layout_gravity="center"/>
-    <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_gravity="center">
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
+
+            <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/gametype"
-                    android:id="@+id/textView1" android:layout_gravity="center" android:paddingRight="4dp"/>
-            <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-            <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/AD"
-                    android:id="@+id/AD" android:checked="true" android:textSize="14dp"/>
-            <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/noAD"
-                    android:id="@+id/noAD" android:checked="false" android:textSize="14dp"/>
-            </RadioGroup>
-        </TableRow>
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="100dp"
-                    android:text="@string/settype"
-                    android:id="@+id/textView1" android:layout_gravity="center" android:paddingRight="4dp"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/games_in_set" android:layout_column="1"  android:text="6"
-                    android:maxWidth="1dp" android:clickable="true" android:editable="true" android:enabled="true"/>
+                    android:text="@string/toast"
+                    android:id="@+id/toast" />
 
 
-        </TableRow>
 
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/next"
                     android:layout_gravity="center"
-                    android:id="@+id/button" android:onClick="onSubmit" android:layout_column="1"/>
-        </TableRow>
-    </TableLayout>
+                    android:id="@+id/button" android:onClick="onSubmit" />
+
 </LinearLayout>

@@ -14,8 +14,8 @@ public class Match extends ACounter {
     public Match()
     {
         _set_start_score(new Runner() {public void run(IPlayer player){
-            player.set_sets("0");
-            Vector<String> games = new Vector<String>();
+            player.set_sets(0);
+            Vector<Integer> games = new Vector<Integer>();
             player.set_games(games);
         }});
         _child = myApp.get_umpire().create_set();
@@ -32,8 +32,8 @@ public class Match extends ACounter {
         {
             result = true;
         }
-        wplayer.set_sets(String.valueOf(w));
-        lplayer.set_sets(String.valueOf(l));
+        wplayer.set_sets(w);
+        lplayer.set_sets(l);
         _child = myApp.get_umpire().create_set();
         return result;
     }

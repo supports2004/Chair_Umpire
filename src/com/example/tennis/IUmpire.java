@@ -1,5 +1,7 @@
 package com.example.tennis;
 
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Администратор
@@ -8,10 +10,13 @@ package com.example.tennis;
  * To change this template use File | Settings | File Templates.
  */
 public interface IUmpire {
+
     public enum Event
     {
-        NEW_MATCH, NEW_SET, NEW_GAME, NEW_TIEBREAK, CHANGE_SERVE, CHANGE_SIDES
+        NEW_MATCH, NEW_SET, NEW_GAME, NEW_TIEBREAK, NEW_POINT, CHANGE_SERVE, CHANGE_SIDES, UNDO_START, UNDO_END, DECIDING_POINT
     }
+
+    Map<String,  Object> request();
     void add_point(IPlayer win_player);
 
     boolean undo();
@@ -23,6 +28,10 @@ public interface IUmpire {
     IPlayer get_right_player();
 
     IPlayer get_serving_player();
+
+    IPlayer get_returning_player();
+
+    public ICourt get_court();
 
     Integer get_serving_box();
 
@@ -38,6 +47,10 @@ public interface IUmpire {
 
     TieBreak create_tiebreak();
 
-    void init_court(ICourt _court);
+    void init(ICourt _court);
+
+    public void notify(Event event);
+    public void addObserver(java.util.Observer observer);
+    public void deleteObservers();
 
 }

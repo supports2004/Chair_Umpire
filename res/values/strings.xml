@@ -11,6 +11,8 @@
     <string name="formatlabel">Формат игры:</string>
     <string name="gametype">тип геймов:</string>
     <string name="settype">кол-во выигрышных геймов в сете:</string>
+    <string name="prefslabel">Настройки прогаммы:</string>
+    <string name="toast">всплывающие подсказки судейских объявлений</string>
 
     <string name="AD">больше-меньше</string>
     <string name="noAD">с розыгрышем решающего очка</string>
@@ -22,7 +24,19 @@
 
     <string name="set_game">%1$s сет, %2$s гейм</string>
     <string name="set_tiebreak">%1$s сет, тайбрейк</string>
+    <string name="game_end">гейм %1$s, %2$s ведет %3$s-%4$s в %5$s сете</string>
+    <string name="game_end_equal">гейм %1$s, по %2$s в %3$s сете</string>
 
     <string name="change_sides">смена сторон</string>
+
+    <string name="serve_play">%1$s сет. Подаёт %2$s</string>
+    <string name="game_and_set_player">Гейм и %1$s сет %2$s, %3$s-%4$s.&#160;</string>
+    <string name="player_leads_in_sets">%1$s ведет %2$s-%3$s по сетам.&#160;</string>
+    <string name="tiebreak">Тайбрейк!</string>
+    <string name="deciding_point">Решающее очко, принимающий выбирает квадрат подачи!</string>
+    <string name="equal_in_sets">%1$s-%1$s по сетам</string>
+    <string name="pause">перерыв между сетами 2 минуты:</string>
+    <string name="Continue">Продолжить</string>
+
 
 </resources>

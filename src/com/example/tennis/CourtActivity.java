@@ -2,12 +2,11 @@ package com.example.tennis;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -15,7 +14,7 @@ import java.util.Vector;
 
 
 public class CourtActivity extends Activity implements ICourt, Observer {
-    private Umpire _umpire;
+    private IUmpire _umpire;
     private Vector<TextView[]> _games = new Vector<TextView[]>();
     private TableRow.LayoutParams _vertical_Lshift = new TableRow.LayoutParams();
     private TableRow.LayoutParams _vertical_Rshift = new TableRow.LayoutParams();
@@ -25,10 +24,11 @@ public class CourtActivity extends Activity implements ICourt, Observer {
     private int _setsnum;
     private int _gamessnum;
     private String _header;
-    private String[] _str_digits;
-    private boolean _new_game_event = true;
-    private boolean _change_serve_event = true;
-    private boolean _change_sides_event = true;
+    private String[] _str_points = {null,null};
+    private boolean _new_game_event;
+    private boolean _change_serve_event;
+    private boolean _change_sides_event;
+    private  boolean _is_tie = false;
 
 
 
@@ -38,6 +38,8 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         {
             case NEW_MATCH:
                 _setsnum = 0;
+                _change_serve_event = true;
+                _change_sides_event = true;
                 break;
             case NEW_SET:
                 _setsnum ++;
@@ -46,41 +48,43 @@ public class CourtActivity extends Activity implements ICourt, Observer {
             case NEW_GAME:
                 _new_game_event = true;
                 _gamessnum ++;
-                _header = String.format(getString(R.string.set_game), _get_str_digit(_setsnum), _get_str_digit(_gamessnum));
+                _header = String.format(getString(R.string.set_game), Helper.spell_the_digit(_setsnum, R.array.kakoi_po_schetu), Helper.spell_the_digit(_gamessnum, R.array.kakoi_po_schetu));
+                _is_tie = false;
                 break;
             case NEW_TIEBREAK:
                 _new_game_event = true;
-                _header = String.format(getString(R.string.set_tiebreak), _get_str_digit(_setsnum));
+                _header = String.format(getString(R.string.set_tiebreak), Helper.spell_the_digit(_setsnum, R.array.kakoi_po_schetu));
+                _is_tie = true;
                 break;
             case CHANGE_SERVE:
                 _change_serve_event = true;
+                break;
             case CHANGE_SIDES:
                 _change_sides_event = true;
+                break;
         }
     }
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        _str_digits = getResources().getStringArray(R.array.digits);
         setContentView(R.layout.court);
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
         _score_lines[1] = (TableRow) findViewById(R.id.score_line2);
         _court_img = (ImageView) findViewById(R.id.court);
         _umpire = myApp.get_umpire();
+        // from resume:
+        _umpire.deleteObservers();
         _umpire.addObserver(this);
-    }
-
-    public void onResume()
-    {
-        super.onResume();
-        _umpire.init_court(this);
+        _umpire.init(this);
         ((TextView) findViewById(R.id.score_1player)).setText(_umpire.get_players()[0].get_name());
         ((TextView) findViewById(R.id.score_2player)).setText(_umpire.get_players()[1].get_name());
+        Log.w("Court", "onCreate");
     }
 
     public void show()
     {
+       // _show_toast(_spellpoints_msg());
         //((TextView) findViewById(R.id.header)).setText(_header);
         setTitle(_header);
 /*        Resources mRes = getApplicationContext().getResources();
@@ -107,7 +111,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         ((TextView) findViewById(R.id.court_rplayer)).setLayoutParams(_vertical_Rshift);
     //================== /расположение игроков в нужные квадраты
     //================== Имена игроков по бокам от корта:
-        if (_change_sides_event )
+        if (_change_sides_event || _change_serve_event)
         {
             ((TextView) findViewById(R.id.court_lplayer)).setText(this._get_lplayer_name());
             ((TextView) findViewById(R.id.court_rplayer)).setText(this._get_rplayer_name());
@@ -143,9 +147,18 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         ((TextView) findViewById(R.id.score_1games)).setText(games1.lastElement());
         Vector<String> rgames2 = (Vector<String>) players[1].get_games();
         ((TextView) findViewById(R.id.score_2games)).setText(rgames2.lastElement());*/
-
-        ((TextView) findViewById(R.id.score_1points)).setText(players[0].get_points());
-        ((TextView) findViewById(R.id.score_2points)).setText(players[1].get_points());
+        if (_is_tie)
+        {
+            _str_points[0] = players[0].get_points().toString();
+            _str_points[1] = players[1].get_points().toString();
+        }
+        else
+        {
+            _str_points[0] = players[1].get_points() == 4 ? "" : Helper.spell_the_digit(players[0].get_points(), R.array.points);
+            _str_points[1] = players[0].get_points() == 4 ? "" : Helper.spell_the_digit(players[1].get_points(), R.array.points);
+        }
+        ((TextView) findViewById(R.id.score_1points)).setText(_str_points[0]);
+        ((TextView) findViewById(R.id.score_2points)).setText(_str_points[1]);
         //============================================== /Таблица со счетом
     }
 
@@ -227,33 +240,9 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         {
             for (int row = 0; row < 2; row ++)
             {
-                _games.get(i)[row].setText(((Vector<String>) _umpire.get_players()[row].get_games()).get(i));
+                _games.get(i)[row].setText(_umpire.get_players()[row].get_games().get(i).toString());
             }
 
         }
-    }
-
-    private String _get_str_digit(Integer d)
-    {
-        d = -- d;
-        if (d >= _str_digits.length )
-        {
-            return d.toString();
-        }
-        else
-        {
-            return _str_digits[d];
-        }
-    }
-
-
-
-
-
-    private void _show_toast(String msg)
-    {
-        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 }

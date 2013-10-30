@@ -3,15 +3,22 @@ import android.app.Application;
 
 
 public class myApp extends Application {
-    private static Umpire _umpire;
+    private static IUmpire _umpire;
+    private static myApp _myapp;
 
     public final void onCreate()
     {
         super.onCreate();
         _umpire = new Umpire();
+        _myapp = this;
     }
 
-    public static Umpire get_umpire()
+    public static myApp get_instance()
+    {
+        return _myapp;
+    }
+
+    public static IUmpire get_umpire()
     {
         return _umpire;
     }
@@ -40,6 +47,11 @@ public class myApp extends Application {
     public static TieBreak create_tiebreak()
     {
         return new TieBreak();
+    }
+
+    public static Toast create_toast()
+    {
+        return new Toast();
     }
 
 }

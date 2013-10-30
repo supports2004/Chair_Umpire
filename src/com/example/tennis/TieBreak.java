@@ -11,15 +11,15 @@ public class TieBreak extends ACounter {
 
     public TieBreak()
     {
-        _set_start_score(new Runner() {public void run(IPlayer player){player.set_points("0");}});
+        _set_start_score(new Runner() {public void run(IPlayer player){player.set_points(0);}});
     }
 
     protected boolean _count (IPlayer wplayer, IPlayer lplayer)
     {
         boolean result = false;
 
-        int w = Integer.valueOf(wplayer.get_points());
-        int l = Integer.valueOf(lplayer.get_points());
+        int w = wplayer.get_points();
+        int l = lplayer.get_points();
         w ++;
         if ((w + l) % 2 != 0)
         {
@@ -47,8 +47,8 @@ public class TieBreak extends ACounter {
                 myApp.get_umpire().change_sides();
             }
         }
-        wplayer.set_points(String.valueOf(w));
-        lplayer.set_points(String.valueOf(l));
+        wplayer.set_points(w);
+        lplayer.set_points(l);
         if (result == false || myApp.get_umpire().get_serving_box() == 2)
         {
             myApp.get_umpire().change_serving_box();
