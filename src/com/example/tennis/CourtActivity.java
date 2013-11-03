@@ -1,6 +1,8 @@
 package com.example.tennis;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -67,6 +69,21 @@ public class CourtActivity extends Activity implements ICourt, Observer {
 
     public void onCreate(Bundle savedInstanceState)
     {
+/*        if (savedInstanceState == null)
+        {
+            Log.w("CourtActivity", "savedInstanceState == null");
+        }
+        else
+        {
+            Log.w("CourtActivity", "savedInstanceState != null");
+        }
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            Log.w("CourtActivity", "Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0");
+        }
+        else
+        {
+            Log.w("CourtActivity", "Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) == 0");
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.court);
         _score_lines[0] = (TableRow) findViewById(R.id.score_line1);
@@ -79,7 +96,49 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         _umpire.init(this);
         ((TextView) findViewById(R.id.score_1player)).setText(_umpire.get_players()[0].get_name());
         ((TextView) findViewById(R.id.score_2player)).setText(_umpire.get_players()[1].get_name());
-        Log.w("Court", "onCreate");
+        Log.w("CourtActivity", "onCreate()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        Log.w("CourtActivity", "onDestroy()");
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        Log.w("CourtActivity", "onPause()");
+    }
+
+    @Override
+    protected void onRestart() {
+        // TODO Auto-generated method stub
+        super.onRestart();
+        Log.w("CourtActivity", "onRestart()");
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        Log.w("CourtActivity", "onResume()");
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        Log.w("CourtActivity", "onStart()");
+    }
+
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        Log.w("CourtActivity", "onStop()");
     }
 
     public void show()
