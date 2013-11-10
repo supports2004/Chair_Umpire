@@ -1,3 +1,23 @@
+/*
+Copyright © 2013 Alexei A
+supports2004@mail.ru
+
+This file is part of Chair Umpire(tennis score).
+
+    Chair Umpire(tennis score) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Chair Umpire(tennis score) is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Chair Umpire(tennis score).  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.my.tennis;
 
 import android.app.Activity;
@@ -87,19 +107,11 @@ public class CourtActivity extends Activity implements ICourt, Observer {
 
     public void show()
     {
-       // _show_toast(_spellpoints_msg());
-        //((TextView) findViewById(R.id.header)).setText(_header);
         setTitle(_header);
-/*        Resources mRes = getApplicationContext().getResources();
-        Integer identifierID = mRes.getIdentifier("picture", "drawable", getApplicationContext().getPackageName());*/
-        // выбираем одно из черырех изображений корта:
+        // select one of 4 court images:
         _court_img.setImageResource(_court_images[_umpire.get_serving_box() + (_umpire.get_left_player() == _umpire.get_serving_player() ? -1 : 1)]);
 
-
-      //  TextView textPrim1 = new TextView(getApplicationContext());
-      //  TableRow row = (TableRow) findViewById(R.id.score_line1);
-    //    row.addView();
-    //================== расположение игроков в нужные квадраты:
+    //================== setup players in proper boxes:
         if (_umpire.get_serving_box() == 1)
         {
             _vertical_Lshift.topMargin = _vertical_Rshift.bottomMargin = 30;
@@ -112,18 +124,18 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         }
         ((TextView) findViewById(R.id.court_lplayer)).setLayoutParams(_vertical_Lshift);
         ((TextView) findViewById(R.id.court_rplayer)).setLayoutParams(_vertical_Rshift);
-    //================== /расположение игроков в нужные квадраты
-    //================== Имена игроков по бокам от корта:
+    //================== /setup players in proper boxes
+    //================== Player's names on court sides:
         if (_change_sides_event || _change_serve_event)
         {
             ((TextView) findViewById(R.id.court_lplayer)).setText(this._get_lplayer_name());
             ((TextView) findViewById(R.id.court_rplayer)).setText(this._get_rplayer_name());
             _change_sides_event = false;
         }
-    //================== /Имена игроков по бокам от корта
-    //================================================== Таблица со счетом:
+    //================== /Player's names on court sides
+    //================================================== Score table:
         IPlayer[] players = _umpire.get_players();
-        // мячик подачи перед именем:
+        // serve ball in front of the name:
         if (_change_serve_event)
         {
             if (players[0] == _umpire.get_serving_player())
@@ -138,7 +150,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
             }
             _change_serve_event = false;
         }
-        // счет:
+        // score:
         if (_new_game_event)
         {
             _dynamic_sets();
@@ -162,7 +174,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         }
         ((TextView) findViewById(R.id.score_1points)).setText(_str_points[0]);
         ((TextView) findViewById(R.id.score_2points)).setText(_str_points[1]);
-        //============================================== /Таблица со счетом
+        //============================================== /Score table
     }
 
 
@@ -193,7 +205,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
     {
         if (!_umpire.undo())
         {
-            // очки на нулях, минусовать некуда, откатываемся на пред. экран:
+            // score is empty, no futher score undo is possible, go back on previous activity:
             super.onBackPressed();
         }
     }
@@ -216,7 +228,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
         int sets_amount = ((Vector) _umpire.get_players()[0].get_games()).size(); // сыгранные + текущий сет
         int games_size = _games.size();
         if (sets_amount < games_size)
-        {    // в результате undo уменьшилось количество сетов:
+        {    // because of undo amount of sets decreased:
              for (int i = sets_amount; i < games_size; i ++)
              {
                  _score_lines[0].removeView(_games.lastElement()[0]);
@@ -225,7 +237,8 @@ public class CourtActivity extends Activity implements ICourt, Observer {
              }
         }
         else if (sets_amount > games_size)
-        {   // игроки сыграли очередной сет или игра только началась:
+        {
+            // players have finished one more set or game just began:
             for (int i = games_size; i < sets_amount; i ++)
             {
                 TextView[] column = {new TextView(getApplicationContext()), new TextView(getApplicationContext())};
@@ -259,7 +272,7 @@ public class CourtActivity extends Activity implements ICourt, Observer {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Операции для выбранного пункта меню
+
         switch (item.getItemId()) {
             case R.id.action_restart:
                 startActivity(new Intent(getApplicationContext(), PlayerNamesActivity.class));

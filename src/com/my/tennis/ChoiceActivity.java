@@ -51,16 +51,16 @@ public class ChoiceActivity extends Activity {
             }
 
         };
-        // имена игроков перед радиобатонами выбора подачи:
+
         // player's names in front of serve choice radiobuttons:
         TextView choice_namel = (TextView) findViewById(R.id.name1);
         TextView choice_name2 = (TextView) findViewById(R.id.name2);
         choice_namel.setText(((String[]) myApp.get_umpire().request().get("names"))[0]);
         choice_name2.setText(((String[]) myApp.get_umpire().request().get("names"))[1]);
-        // ликвидируем множественный выбор в радиобаттонах подачи:
+        // remove multitype choice in serve choice radiobuttons:
         RadioButton serve1 = (RadioButton) findViewById(R.id.serve1);
         RadioButton serve2 = (RadioButton)findViewById(R.id.serve2);
-        // при возврате устанавливаем радиобатоны подачи в положение с учетом предыдущего выбора:
+        // if came back, set serve choice radiobuttons with previous choice selected:
         serve1.setChecked(((Boolean) myApp.get_umpire().request().get("player1_is_serve")));
         serve2.setChecked(((Boolean) myApp.get_umpire().request().get("player1_is_serve")) ? false : true);
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);

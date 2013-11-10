@@ -1,3 +1,23 @@
+/*
+Copyright © 2013 Alexei A
+supports2004@mail.ru
+
+This file is part of Chair Umpire(tennis score).
+
+    Chair Umpire(tennis score) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Chair Umpire(tennis score) is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Chair Umpire(tennis score).  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.my.tennis;
 
 import android.app.AlertDialog;
@@ -61,7 +81,7 @@ public class Toast_en extends Toast implements Observer  {
                 _games[0] = 0;
                 _games[1] = 0;
                 if (_setsnum > 0)
-                {   //гейм и %1$s сет %2$s, %3$s-%4$s. :
+                {   //game and %1$s set %2$s, %3$s-%4$s. :
                     if (_umpire.get_players()[0].get_games().lastElement() > _umpire.get_players()[1].get_games().lastElement())
                     {
                         _won_player  = _umpire.get_players()[0];
@@ -73,13 +93,13 @@ public class Toast_en extends Toast implements Observer  {
                         _lost_player = _umpire.get_players()[0];
                     }
                     _alertmsg = String.format(myApp.get_instance().getString(R.string.game_and_set_player), Helper.spell_the_digit(_setsnum, R.array.kakoi_po_schetu), _won_player.get_name(), Helper.spell_the_digit(_won_player.get_games().lastElement(), R.array.skolko), Helper.spell_the_digit(_lost_player.get_games().lastElement(), R.array.skolko));
-                    // %1$s-%1$s по сетам :
+                    // %1$s sets all :
                     if (_umpire.get_players()[0].get_sets() == _umpire.get_players()[1].get_sets())
                     {
                         _alertmsg += String.format(myApp.get_instance().getString(R.string.equal_in_sets), Helper.spell_the_digit(_umpire.get_players()[0].get_sets(), R.array.skolko));
                     }
                     else
-                    {   // %1$s ведет %2$s-%3$s по сетам:
+                    {   // %1$s leads %2$s sets to %3$s:
                         if (_umpire.get_players()[0].get_sets() > _umpire.get_players()[1].get_sets())
                         {
                             _won_player  = _umpire.get_players()[0];
@@ -132,7 +152,7 @@ public class Toast_en extends Toast implements Observer  {
                         _msg = String.format(myApp.get_instance().getString(R.string.game_end_equal), _winner_name, Helper.spell_the_digit(_games[0], R.array.skolko)/*, Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu)*/ );
                     }
                     else if (_games[0] > _games[1])
-                    {  //гейм %1$s, %2$s ведет %3$s-%4$s в %5$s сете
+                    {  //game %1$s, %2$s leads %3$s-%4$s
                         _msg = String.format(myApp.get_instance().getString(R.string.game_end), _winner_name, _umpire.get_players()[0].get_name(), Helper.spell_the_digit(_games[0], R.array.skolko), Helper.spell_the_digit(_games[1],R.array.skolko)/*, Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu)*/ );
                     }
                     else

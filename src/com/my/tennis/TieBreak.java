@@ -1,3 +1,23 @@
+/*
+Copyright © 2013 Alexei A
+supports2004@mail.ru
+
+This file is part of Chair Umpire(tennis score).
+
+    Chair Umpire(tennis score) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Chair Umpire(tennis score) is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Chair Umpire(tennis score).  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package com.my.tennis;
 
 
@@ -21,7 +41,8 @@ public class TieBreak extends ACounter {
         }
 
         if ((w + l) % 6 == 0)
-        {   // меняем сторонами после каждых 6 розыгрышей:
+        {
+            // change sides after every six points:
             myApp.get_umpire().change_sides();
         }
 
@@ -29,15 +50,19 @@ public class TieBreak extends ACounter {
         {
             result = true;
             // тот кто подавал в тай брейке первым, в след. гейме должен принимать:
+            // player who was serving the first in tiebreak,  is to serve in next game:
             if ((w + l) % 4 == 0 || (w + l) % 4 == 3 )
             {
                 // сет закончился на подаче игрока, который первый подавал, передаем подачу:
+                // set has finished on that player's serve, who was serving the first, change serve:
                 myApp.get_umpire().change_serve();
             }
             // возвращаем расположение сторон в исходную перед началом тай брейка:
+            // get back player's sides to the state before tie break:
             if (((int)Math.floor(((double)(w + l)) / 6)) % 2 == 1 )
             {
                 // было нечетное число смен сторон в течение тайбрейка:
+                // there was odd amount of side changes during tie break:
                 myApp.get_umpire().change_sides();
             }
         }
