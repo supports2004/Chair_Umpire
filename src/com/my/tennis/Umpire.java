@@ -1,4 +1,4 @@
-package com.example.tennis;
+package com.my.tennis;
 
 
 import android.util.Log;
@@ -20,7 +20,7 @@ public class Umpire extends Observable implements IUmpire {
     private Integer  _serving_box;
     private Match _match;
     private ICourt _court;
-    private Vector<Integer> _history = new Vector<Integer>();
+    private Vector<Integer> _history;
 
     public Umpire()
     {
@@ -32,7 +32,7 @@ public class Umpire extends Observable implements IUmpire {
         request.put("AD", true);
         request.put("games_in_set", 6);
         request.put("toast", true);
-        Log.w("Umpire construct", "launchered");
+     //   Log.w("Umpire construct", "launchered");
     }
 
     public Map<String,  Object> request()
@@ -48,7 +48,7 @@ public class Umpire extends Observable implements IUmpire {
         _match.finish(win_player, _left_player == win_player ? _right_player : _left_player);
         notify(Event.NEW_POINT);
         _court.show();
-        Log.w("Empire add_point", "launchered");
+        //Log.w("Empire add_point", "launchered");
     }
 
     @Override
@@ -78,8 +78,9 @@ public class Umpire extends Observable implements IUmpire {
     }
 
     @Override
-    public void init(ICourt _court) {
-
+    public void init(ICourt _court)
+    {
+        _history = new Vector<Integer>();
         this._court = _court;
         this._players[0] = myApp.create_player();
         this._players[1] = myApp.create_player();
@@ -91,7 +92,7 @@ public class Umpire extends Observable implements IUmpire {
         }
         _init_start_conditions();
         _court.show();
-        Log.w("init", "launchered");
+        //Log.w("init", "launchered");
     }
 
     private void _init_start_conditions()

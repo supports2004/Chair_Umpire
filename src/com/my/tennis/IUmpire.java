@@ -1,14 +1,8 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Администратор
- * Date: 01.10.13
- * Time: 21:49
- * To change this template use File | Settings | File Templates.
- */
+
 public interface IUmpire {
 
     public enum Event

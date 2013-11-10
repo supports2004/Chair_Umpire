@@ -1,14 +1,7 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import java.util.Vector;
 
-/**
- * Created with IntelliJ IDEA.
- * User: user
- * Date: 26.08.13
- * Time: 0:57
- * To change this template use File | Settings | File Templates.
- */
 public class Set extends ACounter {
     private int _games_to_win;  // default = 6
     public Set(int games_to_win)

@@ -1,4 +1,4 @@
-package com.example.tennis;
+package com.my.tennis;
 import android.app.Application;
 
 
@@ -51,7 +51,14 @@ public class myApp extends Application {
 
     public static Toast create_toast()
     {
-        return new Toast();
+        if (myApp.get_instance().getResources().getConfiguration().locale.getLanguage().equals("ru"))
+        {
+            return new Toast();
+        }
+        else
+        {
+            return new Toast_en();
+        }
     }
 
 }

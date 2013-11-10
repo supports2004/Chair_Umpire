@@ -1,4 +1,4 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import java.util.Hashtable;
 

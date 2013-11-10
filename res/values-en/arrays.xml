@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="points">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>40</item>
+        <item>AD</item>
+    </string-array>
+
+    <string-array name="spell_points">
+        <item>love</item>
+        <item>fifteen</item>
+        <item>thirty</item>
+        <item>forty</item>
+    </string-array>
+
+    <string-array name="skolko">
+        <item>love</item>
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+        <item>seven</item>
+        <item>eight</item>
+        <item>nine</item>
+        <item>ten</item>
+    </string-array>
+
+
+    <string-array name="kakoi_po_schetu">
+        <item></item>
+        <item>first</item>
+        <item>second</item>
+        <item>third</item>
+        <item>forth</item>
+        <item>fifth</item>
+        <item>sixth</item>
+        <item>seventh</item>
+        <item>eighth</item>
+        <item>ninth</item>
+        <item>tenth</item>
+    </string-array>
+
+
+    <string-array name="skolko_tie">
+        <item>zero</item>
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+        <item>seven</item>
+        <item>eight</item>
+        <item>nine</item>
+        <item>ten</item>
+    </string-array>
+
+    <string-array name="v_kakom_po_schetu">
+        <item></item>
+        <item>first</item>
+        <item>second</item>
+        <item>third</item>
+        <item>forth</item>
+        <item>fifth</item>
+        <item>sixth</item>
+        <item>seventh</item>
+        <item>eighth</item>
+        <item>ninth</item>
+        <item>tenth</item>
+    </string-array>
+</resources>

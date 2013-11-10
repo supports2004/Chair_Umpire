@@ -1,25 +1,17 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Администратор
- * Date: 13.09.13
- * Time: 19:09
- * To change this template use File | Settings | File Templates.
- */
+
 public class PlayerNamesActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.w("PlayerNamesActivity", "onCreate()");
         setContentView(R.layout.players_screen);
         // вбиваем в поля по умолчанию имена, хранящиеся в myApp:
         TextView player_namel = (TextView) findViewById(R.id.player1);
@@ -53,56 +45,4 @@ public class PlayerNamesActivity extends Activity {
 
 
     }
-
-
-
-
-
-
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-        Log.w("PlayerNamesActivity", "onDestroy()");
-    }
-
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        Log.w("PlayerNamesActivity", "onPause()");
-    }
-
-    @Override
-    protected void onRestart() {
-        // TODO Auto-generated method stub
-        super.onRestart();
-        Log.w("PlayerNamesActivity", "onRestart()");
-    }
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        Log.w("PlayerNamesActivity", "onResume()");
-    }
-
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        Log.w("PlayerNamesActivity", "onStart()");
-    }
-
-    @Override
-    protected void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-        Log.w("PlayerNamesActivity", "onStop()");
-    }
-
-
-
-
-
 }

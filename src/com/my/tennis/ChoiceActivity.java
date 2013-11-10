@@ -1,4 +1,24 @@
-package com.example.tennis;
+/*
+Copyright © 2013 Alexei A
+supports2004@mail.ru
+
+This file is part of Chair Umpire(tennis score).
+
+    Chair Umpire(tennis score) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Chair Umpire(tennis score) is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Chair Umpire(tennis score).  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+package com.my.tennis;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,13 +28,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Администратор
- * Date: 13.09.13
- * Time: 21:46
- * To change this template use File | Settings | File Templates.
- */
+
 public class ChoiceActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +52,7 @@ public class ChoiceActivity extends Activity {
 
         };
         // имена игроков перед радиобатонами выбора подачи:
+        // player's names in front of serve choice radiobuttons:
         TextView choice_namel = (TextView) findViewById(R.id.name1);
         TextView choice_name2 = (TextView) findViewById(R.id.name2);
         choice_namel.setText(((String[]) myApp.get_umpire().request().get("names"))[0]);
@@ -61,9 +76,16 @@ public class ChoiceActivity extends Activity {
         myApp.get_umpire().request().put("player1_is_serve", serve1.isChecked());
         Spinner spinner = (Spinner) findViewById(R.id.player1_side);
         myApp.get_umpire().request().put("player1_side", (int) spinner.getSelectedItemId());
-        Intent intent = new Intent(getApplicationContext(), FormatActivity.class);
+        Intent intent;
+/*        if (getResources().getConfiguration().locale.getLanguage().equals("ru"))
+        {
+            intent = new Intent(getApplicationContext(), FormatActivity.class);
+        }
+        else
+        {
+            intent = new Intent(getApplicationContext(), CourtActivity.class);
+        }*/
+        intent = new Intent(getApplicationContext(), FormatActivity.class);
         startActivity(intent);
-/*        Intent intent = new Intent(getApplicationContext(), FormatActivity.class);
-        startActivity(intent);*/
     }
 }

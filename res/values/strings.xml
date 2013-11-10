@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">tennis</string>
+    <string name="app_name">теннисный счет</string>
     <string name="nameslabel">Введите имена игроков:</string>
     <string name="player1">игрок1</string>
     <string name="player2">игрок2</string>
@@ -11,7 +11,7 @@
     <string name="formatlabel">Формат игры:</string>
     <string name="gametype">тип геймов:</string>
     <string name="settype">кол-во выигрышных геймов в сете:</string>
-    <string name="prefslabel">Настройки прогаммы:</string>
+    <string name="prefslabel">Настройки программы:</string>
     <string name="toast">всплывающие подсказки судейских объявлений</string>
 
     <string name="AD">больше-меньше</string>
@@ -37,6 +37,12 @@
     <string name="equal_in_sets">%1$s-%1$s по сетам</string>
     <string name="pause">перерыв между сетами 2 минуты:</string>
     <string name="Continue">Продолжить</string>
+    <string name="tiebreak_equal">по %1$s</string>
+    <string name="tiebreak_leader">%1$s - %2$s, %3$s</string>
+
+
+    <string name="action_restart">начать сначала</string>
+
 
 
 </resources>

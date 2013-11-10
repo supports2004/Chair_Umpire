@@ -1,4 +1,4 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.TextView;
 
-
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,7 +16,7 @@ import java.util.Observer;
  * generates floating messages on court screen
  */
 
-public class Toast implements Observer {
+public class Toast_en extends Toast implements Observer  {
     private String _msg;
     private String _alertmsg;
     private Integer[] _games = {null, null};
@@ -32,7 +31,7 @@ public class Toast implements Observer {
     private IPlayer _won_player;
     private IPlayer _lost_player;
     private android.widget.Toast _toast;
-    Toast()
+    Toast_en()
     {
         _umpire = myApp.get_umpire();
         _umpire.addObserver(this);
@@ -109,7 +108,7 @@ public class Toast implements Observer {
                 break;
             case NEW_GAME:
             case NEW_TIEBREAK:
-                Log.w("toast", "NEW_GAME") ;
+                //Log.w("toast", "NEW_GAME") ;
                 _event.put(IUmpire.Event.NEW_GAME, true);
                 if (_event.get(IUmpire.Event.NEW_SET) != null && _event.get(IUmpire.Event.NEW_SET) == true)
                 {
@@ -130,15 +129,15 @@ public class Toast implements Observer {
                     }
                     if (_games[0] == _games[1])
                     {
-                        _msg = String.format(myApp.get_instance().getString(R.string.game_end_equal), _winner_name, Helper.spell_the_digit(_games[0], R.array.po_skolki), Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu) );
+                        _msg = String.format(myApp.get_instance().getString(R.string.game_end_equal), _winner_name, Helper.spell_the_digit(_games[0], R.array.skolko)/*, Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu)*/ );
                     }
                     else if (_games[0] > _games[1])
                     {  //гейм %1$s, %2$s ведет %3$s-%4$s в %5$s сете
-                        _msg = String.format(myApp.get_instance().getString(R.string.game_end), _winner_name, _umpire.get_players()[0].get_name(), Helper.spell_the_digit(_games[0], R.array.skolko), Helper.spell_the_digit(_games[1],R.array.skolko), Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu) );
+                        _msg = String.format(myApp.get_instance().getString(R.string.game_end), _winner_name, _umpire.get_players()[0].get_name(), Helper.spell_the_digit(_games[0], R.array.skolko), Helper.spell_the_digit(_games[1],R.array.skolko)/*, Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu)*/ );
                     }
                     else
                     {
-                        _msg = String.format(myApp.get_instance().getString(R.string.game_end), _winner_name, _umpire.get_players()[1].get_name(),  Helper.spell_the_digit(_games[1], R.array.skolko), Helper.spell_the_digit(_games[0],R.array.skolko), Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu) );
+                        _msg = String.format(myApp.get_instance().getString(R.string.game_end), _winner_name, _umpire.get_players()[1].get_name(),  Helper.spell_the_digit(_games[1], R.array.skolko), Helper.spell_the_digit(_games[0],R.array.skolko)/*, Helper.spell_the_digit(_setsnum, R.array.v_kakom_po_schetu)*/ );
                     }
 
 
@@ -166,7 +165,7 @@ public class Toast implements Observer {
                 _is_tie = true;
                 break;*/
             case NEW_POINT:
-                Log.w("toast", "NEW_POINT") ;
+                //Log.w("toast", "NEW_POINT") ;
                 _event.put(IUmpire.Event.NEW_POINT, true);
                 if (_event.get(IUmpire.Event.NEW_GAME) != null && _event.get(IUmpire.Event.NEW_GAME) == true)
                 {
@@ -249,24 +248,39 @@ public class Toast implements Observer {
     {
         if (_is_tie)
         {
-            return Helper.spell_the_digit(_umpire.get_serving_player().get_points(), R.array.skolko) + " " + Helper.spell_the_digit(_umpire.get_returning_player().get_points(), R.array.skolko);
+            if (_umpire.get_players()[0].get_points() == _umpire.get_players()[1].get_points())
+            {
+                return String.format(myApp.get_instance().getString(R.string.tiebreak_equal), Helper.spell_the_digit(_umpire.get_players()[0].get_points(), R.array.skolko_tie));
+            }
+            else
+            {
+                _winner_name  = _umpire.get_players()[0].get_points() > _umpire.get_players()[1].get_points() ? _umpire.get_players()[0].get_name() : _umpire.get_players()[1]. get_name();
+                return String.format(myApp.get_instance().getString(R.string.tiebreak_leader), Helper.spell_the_digit(_umpire.get_serving_player().get_points(), R.array.skolko_tie), Helper.spell_the_digit(_umpire.get_returning_player().get_points(), R.array.skolko_tie), _winner_name);
+            }
+
         }
-        if (_umpire.get_serving_player().get_points() == _umpire.get_returning_player().get_points()
-            && (_umpire.get_serving_player().get_points() == 2  || _umpire.get_serving_player().get_points() == 3))
-        {   // ровно:
-            return Helper.spell_the_digit(5, R.array.spell_points);
+        if (_umpire.get_serving_player().get_points() == _umpire.get_returning_player().get_points())
+        {
+            if (_umpire.get_serving_player().get_points() == 2  )
+            {   // thirty all:
+                return String.format(myApp.get_instance().getString(R.string.all),Helper.spell_the_digit(2, R.array.spell_points));
+            }
+            if (_umpire.get_serving_player().get_points() == 3)
+            {   // deuce:
+                return myApp.get_instance().getString(R.string.deuce);
+            }
         }
         if (_umpire.get_returning_player().get_points() - _umpire.get_serving_player().get_points() == 1 && _umpire.get_serving_player().get_points() >/*=*/ 2)
-        {   // меньше:
-            return Helper.spell_the_digit(4, R.array.spell_points);
+        {   // reciever's ad:
+            return String.format(myApp.get_instance().getString(R.string.advantage), _umpire.get_returning_player().get_name());
         }
         if (_umpire.get_serving_player().get_points() - _umpire.get_returning_player().get_points() == 1 && _umpire.get_returning_player().get_points() >/*=*/ 2)
-        {   // больше:
-            return Helper.spell_the_digit(6, R.array.spell_points);
+        {   // server's ad:
+            return String.format(myApp.get_instance().getString(R.string.advantage), _umpire.get_serving_player().get_name());
         }
         if (_umpire.get_serving_player().get_points() == 1 &&  _umpire.get_returning_player().get_points() == 1)
-        {   // по пятнадцати:
-            return Helper.spell_the_digit(7, R.array.spell_points);
+        {   // fifteen all:
+            return String.format(myApp.get_instance().getString(R.string.all),Helper.spell_the_digit(1, R.array.spell_points));
         }
         return Helper.spell_the_digit(_umpire.get_serving_player().get_points(), R.array.spell_points) + " " + Helper.spell_the_digit(_umpire.get_returning_player().get_points(), R.array.spell_points);
     }

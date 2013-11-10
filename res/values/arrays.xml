@@ -17,6 +17,7 @@
         <item>ровно</item>
         <item>больше</item>
         <item>по пятнадцати</item>
+        <item>по тридцати</item>
     </string-array>
 
     <string-array name="skolko">

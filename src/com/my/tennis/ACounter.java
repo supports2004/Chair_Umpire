@@ -1,12 +1,6 @@
-package com.example.tennis;
+package com.my.tennis;
 
-/**
- * Created with IntelliJ IDEA.
- * User: user
- * Date: 25.08.13
- * Time: 22:30
- * To change this template use File | Settings | File Templates.
- */
+
 public abstract class ACounter {
 
 

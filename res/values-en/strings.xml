@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chair Umpire</string>
+    <string name="nameslabel">Input player`s names:</string>
+    <string name="player1">player1</string>
+    <string name="player2">player2</string>
+    <string name="next">Next</string>
+    <string name="choicelabel">Input toss result:</string>
+    <string name="serve">Serve</string>
+    <string name="side">Side</string>
+    <string name="formatlabel">Match format:</string>
+    <string name="gametype">game`s type:</string>
+    <string name="settype">games to win in the set:</string>
+    <string name="prefslabel">Application prefs:</string>
+    <string name="toast">floating umpire`s calls</string>
+
+    <string name="AD">with AD</string>
+    <string name="noAD">no AD(deciding point at 40/40)</string>
+
+    <string-array name="sideslist">
+        <item>on the left</item>
+        <item>on the right</item>
+    </string-array>
+
+    <string name="set_game">%1$s set, %2$s game</string>
+    <string name="set_tiebreak">%1$s set, tiebreak</string>
+    <string name="game_end">game %1$s, %2$s leads %3$s-%4$s<!--, %5$s set--></string>
+    <string name="game_end_equal">game %1$s, %2$s all</string>
+
+    <string name="change_sides">change sides</string>
+
+    <string name="serve_play">%1$s set. %2$s to serve, play</string>
+    <string name="game_and_set_player">game and %1$s set %2$s, %3$s-%4$s.&#160;</string>
+    <string name="player_leads_in_sets">%1$s leads %2$s sets to %3$s&#160;</string>
+    <string name="tiebreak">Tiebreak!</string>
+    <string name="deciding_point">Deciding point, reciever chooses the serving box!</string>
+    <string name="equal_in_sets">%1$s sets all</string>
+    <string name="pause">time between sets 2 minutes:</string>
+    <string name="Continue">Continue</string>
+    <string name="tiebreak_equal">%1$s all</string>
+    <string name="tiebreak_leader">%1$s-%2$s, %3$s</string>
+    <string name="advantage">advantage: %1$s</string>
+    <string name="all">%1$s all</string>
+    <string name="deuce">deuce</string>
+
+
+    <string name="action_restart">restart</string>
+
+
+</resources>

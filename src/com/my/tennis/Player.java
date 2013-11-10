@@ -1,15 +1,8 @@
-package com.example.tennis;
+package com.my.tennis;
 
 import java.util.Vector;
 
-/**
- * Created with IntelliJ IDEA.
- * User: user
- * Date: 10.08.13
- * Time: 23:55
- * To change this template use File | Settings | File Templates.
- * List<List<String>> words = new ArrayList<>();
- */
+
 public class Player implements IPlayer {
     private String _name;
     private Integer _points;
